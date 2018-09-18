@@ -1,0 +1,139 @@
+﻿@model  Debugtime.Master.Models.Input.CourseCatagoryModel
+@{
+    ViewBag.Title = "Categories";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+
+<!-- START PAGE HEADING -->
+<div class="app-heading app-heading-bordered app-heading-page">
+    <div class="icon icon-lg">
+        <span class="icon-chart-settings"></span>
+    </div>
+    <div class="title">
+        <h2>Categories</h2>
+        <p>Add/Edit/Delete Categories</p>
+    </div>
+    <!--<div class="heading-elements">
+        <a href="#" class="btn btn-danger" id="page-like"><span class="app-spinner loading"></span> loading...</a>
+    </div>-->
+</div>
+<div class="app-heading-container app-heading-bordered bottom">
+    <ul class="breadcrumb">
+        <li><a href="#">Dashboard</a></li>
+        <li><a href="#">Courses</a></li>
+        <li class="active">Categories</li>
+    </ul>
+</div>
+<!-- START PAGE CONTAINER -->
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-md-4">
+
+            <!-- LENGTH EXAMPLE -->
+            <div class="title">
+                <h1>Add New Category</h1>
+            </div>
+            @using (Html.BeginForm("Categories", "Courses", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "Attention Required!", new { @class = "text-danger" })
+                <div class="form-group">
+                    <div class="form-group">
+                        <label>Name</label>
+                        @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", placeholder = "" } })
+                        @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                    </div>
+                    <span class="help-block"><i>The name is how it appears on your site.</i></span>
+                </div>
+                <div class="form-group">
+                    <label>Slug</label>
+                    @Html.TextBoxFor(model => model.Slag, new { @class = "form-control", placeholder = "" })
+                    @Html.ValidationMessageFor(model => model.Slag, "", new { @class = "text-danger" })
+                    <span class="help-block"><i>The “slug” is the URL-friendly version of the name. It is usually all lowercase and contains only letters, numbers, and hyphens.</i></span>
+                </div>
+
+                <div class="form-group margin-top-20">
+                    <button class="btn btn-primary" type="submit">Add New Category</button>
+                </div>
+            }
+            <!-- END LENGTH EXAMPLE -->
+
+        </div>
+        <div class="col-md-1">
+        </div>
+
+        <div class="col-md-4 ">
+
+
+            <div class="input-group">
+                <div class="input-group-btn">
+                    <select class="bs-select">
+                        <option>Bulk Options</option>
+                        <option>Delete</option>
+                    </select>
+                </div>
+                <button class="btn btn-default">Apply</button>
+            </div>
+        </div>
+        <div class="cols-md-3">
+            <div class="pull-right"> <p>5 items</p></div>
+
+        </div>
+        <div class="col-md-7 pull-right">
+
+
+            <div class="block block-condensed">
+
+                <div class="margin-top-10 margin-left-10 margin-right-10">
+                    <div class="block-content">
+
+                        <table class="table table-striped table-bordered datatable-extended">
+                            <thead>
+                                <tr>
+                                    @*<th><input type="checkbox" name="app-checkbox-3" value="1" class="app-checkbox"></th>*@
+                                    <th>Name</th>
+                                    <th>Slug</th>
+                                    <th>Count</th>
+                                    <th>Actions</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    @*<td><input type="checkbox" name="app-checkbox-3" value="1" class="app-checkbox"></td>*@
+                                    @*@foreach (var item in Model)
+                                    {
+                                        <td><a>@item.Title</a></td>
+                                        <td>J</td>
+                                        <td>61</td>
+                                        <td>
+                                            <button class="btn btn-default btn-icon"><span class="fa fa-pencil"></span></button>
+                                            <button class="btn btn-default btn-icon"><span class="fa fa-times"></span></button>
+                                        </td>
+                                    }*@
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="help-block">
+                <b> Note:</b>
+                <i>Deleting a category does not delete the posts in that category. Instead, posts that were only assigned to the deleted category are set to the category Uncategorized. </i>
+            </div>
+
+
+
+
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript" src="~/Content/Scripts/jquery.min.js"></script>

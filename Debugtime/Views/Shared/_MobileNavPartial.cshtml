@@ -1,0 +1,48 @@
+﻿@using Debugtime.Extentions
+<div class="primary-nav-mobile translate-out-top">
+    <div class="mobile-nav-menu">
+        <ul class="menu-items">
+            <li class="item-login">
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    <ul class="nav-guest-menu">
+                        <li>
+                            @Html.ActionLink("Sign In", "SignIn", "Account", new { area = "Security" }, new { @class = "signin" })
+                        </li>
+                        <li>
+                            @Html.ActionLink("Sign Up", "SignUp", "Account", new { area = "Security" }, new { @class = "signup" })
+                        </li>
+                    </ul>
+                }
+                else
+                {
+                    <ul class="nav-user-menu vertical menu" data-accordion-menu>
+                        <li>
+                            <a href="#">
+                                <img src="@Url.Action("GetAvatar","Member",new { userId = User.Identity.GetUserId(),area=""})" class="user-avatar profile-image" />
+                                <span class="user-name">@User.Identity.GetUserName()</span>
+                            </a>
+                            <ul class="menu vertical nested is-active">
+                                <li>
+                                    <a href="#0">View Bio</a>
+                                </li>
+                                <li><a href="#0">Edit Bio</a></li>
+                                <li>
+                                    @Html.ActionLink("Sign Out", "SignOut", "Account", new { area = "Security" }, null)
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                }
+            </li>
+            <li class="search-form">
+               @Html.Partial("_SearchForm")
+            </li>
+            <li class="item"><a href="#">Courses</a></li>
+            <li class="item"><a href="#">Featured</a></li>
+            <li class="item"><a href="#">Latest</a></li>
+
+        </ul>
+    </div>
+    <div class="mobile-nav-cancel"></div>
+</div>

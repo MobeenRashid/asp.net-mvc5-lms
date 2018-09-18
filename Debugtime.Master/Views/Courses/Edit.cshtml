@@ -1,0 +1,189 @@
+﻿@model  Debugtime.Master.Models.Input.CoursesInputModel
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+
+<link href="~/Content/Styles/manage-courses.css" rel="stylesheet" />
+<link href="~/Scripts/courses/nestable.min.css" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+<!-- START PAGE HEADING -->
+<div class="app-heading app-heading-bordered app-heading-page">
+    <div class="icon icon-lg">
+        <span class="icon-user-plus"></span>
+    </div>
+    <div class="title">
+        <h2>Edit Course</h2>
+        <p>Edit or Add Lessons to Following Course</p>
+    </div>
+    <!--<div class="heading-elements">
+        <a href="#" class="btn btn-danger" id="page-like"><span class="app-spinner loading"></span> loading...</a>
+    </div>-->
+</div>
+<div class="app-heading-container app-heading-bordered bottom">
+    <ul class="breadcrumb">
+        <li><a href="#">Dashboard</a></li>
+        <li><a href="#">Courses</a></li>
+        <li class="active">Edit Course</li>
+    </ul>
+</div>
+<!-- END PAGE HEADING -->
+<!-- START PAGE CONTAINER -->
+<div class="container">
+
+    <div class="row">
+        @using (Html.BeginForm("Edit", "Courses", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+
+            <div class="col-md-12">
+                <div class="col-md-8">
+                    <div class="form-group margin-top-20">
+                        <div class="title"><h1>Edit Course</h1></div>
+                    </div>
+                    <!-- LENGTH EXAMPLE -->
+                    <div class="block">
+
+                        <div class="title">
+                            <h1>Basic Information</h1>
+                        </div>
+
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "")
+
+                        <div class="form-group">
+                            <label>Category</label>
+                            @Html.DropDownListFor(model=>model.CatagoryId, (IEnumerable<SelectListItem>)ViewBag.Courses, new { @class = "form-control bs-select" })
+                            @Html.ValidationMessageFor(model => model.CatagoryId, null, new { @class = "text-danger" })
+                            @*<select class="bs-select" data-live-search="true">*@
+                        </div>
+                        <div class="form-group">
+                            <label>Title</label>
+                            @Html.TextBoxFor(model => model.Title, new { @class = "form-control", placeholder = "" })
+                            @Html.ValidationMessageFor(model => model.Title, null, new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            <label>Description</label>
+                            @Html.TextAreaFor(model => model.Description, new { @class = "form-control", @rows = "5", placeholder = "" })
+                            @Html.ValidationMessageFor(model => model.Description, null, new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label>Agenda Items</label>
+                            @Html.TextAreaFor(model => model.AgendaItems, new { @class = "form-control", @rows = "5", placeholder = "" })
+                            @Html.ValidationMessageFor(model => model.AgendaItems, null, new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label>Duration</label>
+                            @Html.TextBoxFor(model => model.Duration, new { @class = "form-control", placeholder = "" })
+                            @Html.ValidationMessageFor(model => model.Duration, null, new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label>Price</label>
+                            @Html.TextBoxFor(model => model.Price, new { @class = "form-control", placeholder = "" })
+                            @Html.ValidationMessageFor(model => model.Price, null, new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label>Start Date</label>
+                            @Html.TextBoxFor(model => model.StartDate, new { @class = "form-control bs-datepicker", placeholder = "Choose Date" })
+                            @Html.ValidationMessageFor(model => model.StartDate, null, new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            <label>Tags</label>
+                            @Html.TextAreaFor(model => model.Tags, new { @class = "form-control", @rows = "3", placeholder = "" })
+                            @Html.ValidationMessageFor(model => model.Tags, null, new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group margin-top-20">
+                        <button class="btn btn-success btn-lg" type="submit" style="float:right !important;">Save</button>
+                        <br />
+                    </div>
+
+                    <div class="block">
+                        <img src="~/Content/img/courses/github.png" width="100%" />
+                        <div class="form-group">
+                            <div class="form-group margin-top-20">
+                                <input type="file" name="image" class="file btn-primary" title="<span class='icon-download2'></span> Change Thumbnail">
+                                @Html.ValidationMessageFor(model => model.TitleImagePath, null, new { @class = "text-danger" })
+                            </div>
+                        </div>
+                       
+                    </div>
+                    <div>
+                        <a class="btn btn-info btn-lg" href="@Url.Action("EditLesson","Courses")"  style="margin-bottom:20px;">
+                            Add Lesson <span class="icon-plus-circle pull-right"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            @*<div class="col-md-4">
+                <div class="title">
+                    <h1>
+                        Meta
+                    </h1>
+                    <span class="help-block"><h4>Extra Options</h4></span>
+
+                </div>
+                <div class="block">
+
+
+                </div>
+            </div>*@
+        }
+        @*<div class="col-md-8">
+            <div class="title">
+                <h1>Lessons</h1>
+            </div>
+            <div class="block">
+                <a href="@Url.Action("EditLesson","Courses")">
+                    <button type="button" style="margin-bottom:20px;" class="btn btn-info btn-lg">Add Lesson <span class="icon-plus-circle pull-right"></span></button>
+                </a>
+                <br />
+                <div class="card">
+                    <div class="nestable" id="nestable-handles-primary">
+                        <ul class="nestable-list">
+                            <li class="nestable-item nestable-item-handle" data-id="2">
+                                <div class="nestable-handle"><i class="material-icons">menu</i></div>
+                                <div class="nestable-content">
+                                    <div class="media">
+                                        <div class="media-left media-middle">
+                                            <img src="~/Content/img/courses/vuejs.png" alt="" width="100" class="img-rounded">
+                                        </div>
+                                        <div class="media-body media-middle">
+                                            <h2 class="title">
+                                                <a href="#">Awesome Vue.js with SASS Processing</a>
+                                            </h2>
+                                            <small class="text-muted">updated 1 month ago</small>
+                                        </div>
+                                        <div class="media-right media-middle">
+                                            <a href="#" class="btn btn-white btn-sm"><i class="material-icons">edit</i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+        <!--End Block -->
+
+    </div>
+
+</div>
+
+
+
+<script type="text/javascript" src="~/Content/Scripts/jquery.min.js"></script>
+<script src="~/Scripts/courses/nestable.js"></script>
+<script src="~/Scripts/courses/jquery.nestable.js"></script>
+<style>
+    a {
+        text-decoration: none !important;
+    }
+</style>

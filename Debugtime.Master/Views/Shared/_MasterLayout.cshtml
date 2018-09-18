@@ -1,0 +1,498 @@
+﻿@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Admin Dashboard</title>
+    <!-- META SECTION -->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <!-- END META SECTION -->
+    <!-- CSS INCLUDE -->
+    <link rel="stylesheet" href="~/Content/Styles/admin_default.css">
+    <link href="~/Content/Styles/admin_site.css" rel="stylesheet" />
+    <link href="~/Content/Styles/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/Styles/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/Styles/site.css" rel="stylesheet" />
+    <!-- EOF CSS INCLUDE -->
+    <link href="~/Content/summernote/summernote.css" rel="stylesheet" />
+    @*<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.7/summernote.css" rel="stylesheet">*@
+
+</head>
+<body>
+    <!-- APP WRAPPER -->
+    <div class="app">
+
+        <!-- START APP CONTAINER -->
+        <div class="app-container">
+            <!-- START SIDEBAR -->
+            <div class="app-sidebar app-navigation app-navigation-style-default app-navigation-open-hover dir-left" data-type="close-other">
+                <div class="site-title">
+                    <a href="~/Panel/Index" class="dtm-brand-name">
+                        <span class="dtm-first-name">debug</span><span class="dtm-last-name">time</span>
+                    </a>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="@Url.Action("Index","Panel")"><span class="icon-laptop-phone"></span> Dashboard</a></li>
+                        <li>
+                            <a href="#"><span class="icon-graduation-hat"></span> Courses</a>
+                            <ul>
+                                <li><a href="@Url.Action("Index","Courses")"><span class="icon-pushpin"></span> All Courses</a></li>
+                                <li><a href="@Url.Action("Edit","Courses")"><span class="icon-page-break"></span> Add New Course</a></li>
+                                <li><a href="@Url.Action("EditLesson","Courses")"><span class="icon-page-break"></span> Add Lesson</a></li>
+                                <li><a href="@Url.Action("Categories","Courses")"><span class="icon-chart-settings"></span> Categories</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><span class="icon-bowling-pins"></span> Posts</a>
+                            <ul>
+                                <li><a href="@Url.Action("Index","Posts")"><span class="icon-pushpin"></span> All Posts</a></li>
+                                <li><a href="@Url.Action("Add","Posts")"><span class="icon-page-break"></span> Add New Post</a></li>
+                                <li><a href="@Url.Action("Categories","Posts")"><span class="icon-chart-settings"></span> Categories</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><span class="icon-puzzle"></span> Quiz Manager</a>
+                            <ul>
+                                <li><a href="@Url.Action("Index","Quiz")"><span class="icon-pen-add"></span> All Quizes</a></li>
+                                <li><a href="@Url.Action("Add","Quiz")"><span class="icon-question-circle"></span> Add New Quizes</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><span class="icon-user"></span> Users</a>
+                            <ul>
+                                <li><a href="@Url.Action("Index","Users")"><span class="icon-users"></span> All Users</a></li>
+                                <li><a href="@Url.Action("Add","Users")"><span class="icon-user-plus"></span> Add New User</a></li>
+                                <li><a href="@Url.Action("Profile","Users")"><span class="icon-chart-settings"></span> Your Profile</a></li>
+                                <li><a href="@Url.Action("Author_Profile","Users")"><span class="icon-chart-settings"></span> Author Profile</a></li>
+
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="~/Statement/Index"><span class="icon-receipt"></span> Statement</a>
+
+                        </li>
+                        <li>
+                            <a href="~/Transactions/Index"><span class="icon-bag-dollar"></span> Transactions</a>
+
+                        </li>
+                        @*<li>
+                                <a href="~/CustomCss/Index"><span class="icon-files"></span> Add Custom CSS</a>
+
+                            </li>*@
+                        @*<li>
+                                <a href="~/SignIn/Index"><span class="icon-user-lock"></span> SignIn</a>
+
+                            </li>*@
+
+                    </ul>
+                </nav>
+            </div>
+            <!-- END SIDEBAR -->
+            <!-- START APP CONTENT -->
+            <div class="app-content app-sidebar-left">
+                <!-- START APP HEADER -->
+                <div class="app-header">
+                    <ul class="app-header-buttons">
+                        <li class="visible-mobile"><a href="#" class="btn btn-link btn-icon" data-sidebar-toggle=".app-sidebar.dir-left"><span class="icon-menu"></span></a></li>
+                        <li class="hidden-mobile"><a href="#" class="btn btn-link btn-icon" data-sidebar-minimize=".app-sidebar.dir-left"><span class="icon-list4"></span></a></li>
+                    </ul>
+                    <form class="app-header-search" action="" method="post">
+                        <input type="text" name="keyword" placeholder="Search">
+                    </form>
+
+                    <ul class="app-header-buttons pull-right">
+                        <li>
+                            <div class="contact contact-rounded contact-bordered contact-lg contact-ps-controls">
+                                <img src=@Url.Action("GetAvatar","Users",new{userId=User.Identity.GetUserId()}) alt="John Doe">
+                                <div class="contact-container">
+                                    <a href="#">@User.Identity.Name</a>
+                                    <span>Administrator</span>
+                                </div>
+                                <div class="contact-controls">
+                                    <div class="dropdown">
+                                        <button type="button" class="btn btn-default btn-icon" data-toggle="dropdown"><span class="icon-cog"></span></button>
+                                        <ul class="dropdown-menu dropdown-left">
+                                            <li><a href="#"><span class="icon-cog"></span> Settings</a></li>
+                                            <li><a href="#"><span class="icon-envelope"></span> Messages <span class="label label-danger pull-right">+24</span></a></li>
+                                            <li><a href="#"><span class="icon-users"></span> Contacts <span class="label label-default pull-right">76</span></a></li>
+                                            <li class="divider"></li>
+                                            <li>
+                                                <a href="@Url.Action("SignOut","Account")"><span class="icon-exit-right"></span> Log Out</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- END APP HEADER  -->
+                <!-- START PAGE HEADING -->
+                <!-- END PAGE HEADING -->
+                <!-- START PAGE CONTAINER -->
+                <div class="container">
+                    <div class="row">
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+            <!-- END APP CONTENT -->
+
+        </div>
+        <!-- END APP CONTAINER -->
+        <!-- START APP FOOTER -->
+        <div class="app-footer app-footer-default" id="footer">
+            <div class="app-footer-line extended">
+                <div class="row">
+                </div>
+                <div class="row">
+                </div>
+            </div>
+
+            <div class="app-footer-line darken">
+                <div class="copyright wide text-center">&copy; 2017 DebugTime. All right reserved.</div>
+            </div>
+        </div>
+        <!-- END APP FOOTER -->
+        <!-- START APP SIDEPANEL -->
+        <div class="app-sidepanel scroll" data-overlay="show">
+            <div class="container">
+
+                <div class="app-heading app-heading-condensed app-heading-small">
+                    <div class="icon icon-lg">
+                        <span class="icon-alarm"></span>
+                    </div>
+                    <div class="title">
+                        <h2>Notifications</h2>
+                        <p><strong>7 new</strong>, latest: July 19, 2016 at 10:14:32.</p>
+                    </div>
+                </div>
+
+                <div class="listing margin-bottom-10">
+                    <div class="listing-item margin-bottom-10">
+                        <strong>Product Delivered</strong> <span class="label label-success pull-right">delivered</span>
+                        <p class="margin-0 margin-top-5">#SPW-955-18 to st. StreetName SA, USA.</p>
+                        <p class="text-muted">
+                            <span class="fa fa-truck margin-right-5"></span> 19/07/2016 10:14:32 AM
+                        </p>
+                    </div>
+                    <div class="listing-item margin-bottom-10">
+                        <strong>Successful Payment</strong> <span class="label label-success pull-right">success</span>
+                        <p class="margin-0 margin-top-5">Payment for order #SPW-955-17: <strong>$145.44</strong>.</p>
+                        <p class="text-muted">
+                            <span class="fa fa-bank margin-right-5"></span> 19/07/2016 09:55:12 AM
+                        </p>
+                    </div>
+                    <div class="listing-item margin-bottom-10">
+                        <strong>New Order #SPW-955-17</strong> <span class="label label-warning pull-right">waiting</span>
+                        <p class="margin-0 margin-top-5">Added new order, waiting for payment. <a href="#">Order details</a>.</p>
+                        <p class="text-muted">
+                            <span class="fa fa-bank margin-right-5"></span> 19/07/2016 09:51:55 AM
+                        </p>
+                    </div>
+                    <div class="listing-item margin-bottom-10">
+                        <strong>Money Back Request</strong> <span class="label label-primary pull-right">return</span>
+                        <p class="margin-0 margin-top-5">#SPW-955-17 return requested. <a href="#">Request details</a>.</p>
+                        <p class="text-muted">
+                            <span class="fa fa-bank margin-right-5"></span> 19/07/2016 08:44:51 AM
+                        </p>
+                    </div>
+                    <div class="listing-item margin-bottom-10">
+                        <strong>The critical amount of product</strong> <span class="label label-danger pull-right">important</span>
+                        <p class="margin-0 margin-top-5">Product: <a href="#">Extra Awesome Product</a> (amount: <span class="text-danger">2</span>). <a href="#">Storehouse</a>.</p>
+                        <p class="text-muted">
+                            <span class="fa fa-cube margin-right-5"></span> 19/07/2016 08:30:00 AM
+                        </p>
+                    </div>
+                    <div class="listing-item margin-bottom-10">
+                        <strong>Product Delivery Start</strong> <span class="label label-warning pull-right">delivering</span>
+                        <p class="margin-0 margin-top-5">#SPW-955-18 to st. StreetName SA, USA.</p>
+                        <p class="text-muted">
+                            <span class="fa fa-truck margin-right-5"></span> 18/07/2016 06:14:32 PM
+                        </p>
+                    </div>
+                    <div class="listing-item margin-bottom-10">
+                        <strong>Critical Server Load</strong> <span class="label label-danger pull-right">server</span>
+                        <p class="margin-0 margin-top-5">Disk space: 248.1Gb/250Gb. <a href="#">Control panel</a>.</p>
+                        <p class="text-muted">
+                            <span class="fa fa-truck margin-right-5"></span> 18/07/2016 06:14:32 PM
+                        </p>
+                    </div>
+                </div>
+                <div class="row margin-bottom-30">
+                    <div class="col-xs-6 col-xs-offset-3">
+                        <button class="btn btn-default btn-block">All Notification</button>
+                    </div>
+                </div>
+
+                <div class="app-heading app-heading-condensed app-heading-small margin-bottom-20">
+                    <div class="icon icon-lg">
+                        <span class="icon-cog"></span>
+                    </div>
+                    <div class="title">
+                        <h2>Settings</h2>
+                        <p>Notification Settings</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-2">
+                            <label class="switch switch-sm margin-0">
+                                <input type="checkbox" name="app_settings_1" checked="" value="0">
+                            </label>
+                        </div>
+                        <div class="col-xs-10">
+                            <label>Delivery Information</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-2">
+                            <label class="switch switch-sm margin-0">
+                                <input type="checkbox" name="app_settings_2" checked="" value="0">
+                            </label>
+                        </div>
+                        <div class="col-xs-10">
+                            <label>Product Amount Information</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-2">
+                            <label class="switch switch-sm margin-0">
+                                <input type="checkbox" name="app_settings_3" checked="" value="0">
+                            </label>
+                        </div>
+                        <div class="col-xs-10">
+                            <label>Order Information</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-2">
+                            <label class="switch switch-sm margin-0">
+                                <input type="checkbox" name="app_settings_4" checked="" value="0">
+                            </label>
+                        </div>
+                        <div class="col-xs-10">
+                            <label>Server Load</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-2">
+                            <label class="switch switch-sm margin-0">
+                                <input type="checkbox" name="app_settings_5" value="0">
+                            </label>
+                        </div>
+                        <div class="col-xs-10">
+                            <label>User Registrations</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-2">
+                            <label class="switch switch-sm margin-0">
+                                <input type="checkbox" name="app_settings_6" value="0">
+                            </label>
+                        </div>
+                        <div class="col-xs-10">
+                            <label>Purchase Information</label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- END APP SIDEPANEL -->
+        <!-- APP OVERLAY -->
+        <div class="app-overlay"></div>
+        <!-- END APP OVERLAY -->
+    </div>
+    <!-- END APP WRAPPER -->
+    <!-- START SCRIPTS -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <script type="text/javascript" src="~/Content/Scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Content/Scripts/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="~/Content/Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Content/Scripts/moment.min.js"></script>
+
+    <script type="text/javascript" src="~/Content/Scripts/jquery.mCustomScrollbar.min.js"></script>
+    <script type="text/javascript" src="~/Content/Scripts/bootstrap-select.js"></script>
+    <script type="text/javascript" src="~/Content/Scripts/bootstrap-datetimepicker.js"></script>
+
+    <script type="text/javascript" src="~/Content/Scripts/jquery.maskedinput.min.js"></script>
+    <script type="text/javascript" src="~/Content/Scripts/jquery.form-validator.min.js"></script>
+
+    <script type="text/javascript" src="~/Content/Scripts/jquery.noty.packaged.js"></script>
+
+    <script type="text/javascript" src="~/Content/Scripts/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="~/Content/Scripts/dataTables.bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="~/Content/Scripts/sweetalert.min.js"></script>
+    <script type="text/javascript" src="~/Content/Scripts/jquery.knob.min.js"></script>
+
+    <script type="text/javascript" src="~/Content/Scripts/jquery-jvectormap.min.js"></script>
+    <script type="text/javascript" src="~/Content/Scripts/jquery-jvectormap-world-mill-en.js"></script>
+    <script type="text/javascript" src="~/Content/Scripts/jquery-jvectormap-us-aea-en.js"></script>
+
+    <script type="text/javascript" src="~/Content/Scripts/jquery.sparkline.min.js"></script>
+
+    <script type="text/javascript" src="~/Content/Scripts/morris.min.js"></script>
+    <script type="text/javascript" src="~/Content/Scripts/raphael.min.js"></script>
+
+    <script type="text/javascript" src="~/Content/Scripts/d3.v3.js"></script>
+    <script type="text/javascript" src="~/Content/Scripts/rickshaw.min.js"></script>
+
+    <script type="text/javascript" src="~/Content/Scripts/isotope.pkgd.min.js"></script>
+
+
+    <script type="text/javascript" src="~/Content/Scripts/app.js"></script>
+    <script type="text/javascript" src="~/Content/Scripts/app_demo.js"></script>
+    <script type="text/javascript" src="~/Content/Scripts/app_plugins.js"></script>
+    <!-- END SCRIPTS -->
+    <script type="text/javascript" src="~/Content/Scripts/app_demo_dashboard.js"></script>
+    <script src="~/Content/summernote/summernote.js"></script>
+
+    @*<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.7/summernote.js"></script>*@
+    @*<script type="text/javascript">
+        var URL = window.URL || window.webkitURL;
+        var video = document.getElementsByTagName('video')[0];
+        function onChange() {
+            var fileItem = document.getElementById('fileItem');
+            var files = fileItem.files;
+            var file = files[0];
+            var url = URL.createObjectURL(file);
+            video.src = url;
+            video.load();
+            video.onloadeddata = function () {
+                video.play();
+            }
+        }
+    </script>*@
+    <script type="text/javascript">
+        var URL = window.URL || window.webkitURL;
+        var video = document.getElementsByTagName('iframe')[0];
+        function onChange() {
+            debugger;
+            var fileItem = document.getElementById('fileItem');
+            var files = fileItem.files;
+            var file = files[0];
+            var url = URL.createObjectURL(file);
+            video.src = url;
+            UploadFile(files);
+        }
+    </script>
+    @*<script>
+
+        $(document).ready(function () {
+            $('#btnUpload').click(function () {
+                UploadFile($('#fileItem')[0].files);
+            }
+            )
+        });
+
+        function UploadFile(TargetFile) {
+            // create array to store the buffer chunks
+            var FileChunk = [];
+            // the file object itself that we will work with
+            var file = TargetFile[0];
+            // set up other initial vars
+            var MaxFileSizeMB = 1;
+            var BufferChunkSize = MaxFileSizeMB * (1024 * 1024);
+            var ReadBuffer_Size = 1024;
+            var FileStreamPos = 0;
+            // set the initial chunk length
+            var EndPos = BufferChunkSize;
+            var Size = file.size;
+
+            // add to the FileChunk array until we get to the end of the file
+            while (FileStreamPos < Size) {
+                // "slice" the file from the starting position/offset, to  the required length
+                FileChunk.push(file.slice(FileStreamPos, EndPos));
+                FileStreamPos = EndPos; // jump by the amount read
+                EndPos = FileStreamPos + BufferChunkSize; // set next chunk length
+            }
+            // get total number of "files" we will be sending
+            var TotalParts = FileChunk.length;
+            var PartCount = 0;
+            // loop through, pulling the first item from the array each time and sending it
+            while (chunk = FileChunk.shift()) {
+                PartCount++;
+                // file name convention
+                var FilePartName = file.name + ".part_" + PartCount + "." + TotalParts;
+                // send the file
+                UploadFileChunk(chunk, FilePartName);
+            }
+        }
+
+
+        function UploadFileChunk(Chunk, FileName) {
+            var FD = new FormData();
+            FD.append('file', Chunk, FileName);
+            $.ajax({
+                type: "POST",
+                url: 'https://localhost:44365/api/course/AddVideoInfo',
+                contentType: false,
+                processData: false,
+                data: FD
+            });
+        }
+        
+    </script>*@
+    <script src="~/Scripts/UploadVideo.js"></script>
+    <!--Custom CSS-->
+    <style>
+        .primary-nav-left .site-title {
+            display: inline-block;
+            width: 90%;
+            text-align: center;
+            font-size: 1.9em;
+            position: relative;
+            text-align: center;
+            margin: auto;
+        }
+
+        .site-title .dtm-brand-name {
+            margin: 0;
+            line-height: 60px;
+        }
+
+        .dtm-brand-name .dtm-first-name {
+            color: #f1a226;
+        }
+
+        .dtm-brand-name {
+            padding-left: 10px;
+            font-weight: bold;
+            font-variant-caps: normal;
+            font-size: 0.9em;
+            font-family: "Segoe UI";
+            position: relative;
+            font-size: 1.8em;
+        }
+
+            .dtm-brand-name .dtm-last-name {
+                color: #ffffff;
+            }
+
+        a {
+            text-decoration: none !important;
+        }
+    </style>
+    @RenderSection("Styles", false);
+    @RenderSection("scripts", false)
+</body>
+</html>

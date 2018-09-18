@@ -1,0 +1,80 @@
+﻿@using Debugtime.Common.Static
+@using Microsoft.AspNet.Identity
+@model Debugtime.Common.Model.View.AssessmentQuizViewModel
+
+@{
+    ViewBag.Title = Model.Title;
+    ViewBag.Heading = "Responsive Web Development";
+    ViewBag.Learning = false;
+
+    ViewBag.QuizId = Model.QuizId;
+
+}
+<div class="quiz-container medium-8 medium-push-2 columns">
+    <div class="top">
+        <p class="qr">@Model.RemainingQuestions questions remaining</p>
+    </div>
+    <div class="middle medium-10 medium-push-1 column">
+        <div class="question">
+            <h4>@Model.Question.Title?</h4>
+        </div>
+        <div class="options">
+            <ul>
+                @foreach (var option in Model.Question.QuestionOptions)
+                {
+                    <li class="option">
+                        <button class="button button-option questionOption" data-user-id="@User.Identity.GetUserId()" data-quiz-id="@Model.QuizId" data-question-key="@Model.Question.Key" data-option-key="@option.Key">
+                            @option.Value
+                        </button>
+                    </li>
+                }
+
+            </ul>
+        </div>
+    </div>
+    <div class="medium-10 medium-push-1 column bottom">
+        @if (Model.HasNext)
+        {
+            <a href="@Url.Action("Index","Assessment",new{area="Quiz",quizId=Model.QuizId,question=Model.NextQuestion})" class="button button-orange float-right">Next Question</a>
+        }
+        else
+        {
+            <a href="@Url.Action("Result", "Assessment", new { quizId = Model.QuizId })" class="button button-orange float-right">Finish</a>
+        }
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript">
+        $(function() {
+            var $btnOption = $(".questionOption");
+
+            $btnOption.click(function() {
+                var cOption = $(this);
+
+                var userId = cOption.attr("data-user-id");
+                var quizId = cOption.attr("data-quiz-id");
+                var answer = cOption.text().trim();
+                var answerKey = cOption.attr("data-option-key");
+                var questionKey = cOption.attr("data-question-key");
+
+                $.ajax({
+                    url: "@ResourceStrings.ApiBaseAddress" + "/api/quiz/user/answer",
+                    type: "POST",
+                    dataType: "text json",
+                    data: {
+                        UserId: userId,
+                        QuizId: quizId,
+                        Answer: answer,
+                        AnswerKey: answerKey,
+                        QuestionKey: questionKey
+                    }
+                }).always(function() {
+                    cOption.css("border-color", "#007ac6");
+                    cOption.css("background-color", "#007ac6");
+                    cOption.css("color", "#fff");
+                    $btnOption.prop("disabled", "true");
+                });
+            });
+        });
+    </script>
+}

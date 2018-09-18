@@ -1,0 +1,85 @@
+﻿@using Debugtime.Common.Model.View
+@model Debugtime.Common.Model.View.CourseSearchViewModel
+
+@{
+    ViewBag.Title = "Search Result";
+}
+
+<div class="medium-12 columns search-container">
+    <div class="large-8 large-push-2 medium-10 medium-push-1 column result-container">
+        <h5 class="medium-12 column caption">Search Result <span class="sub">for  <b>"@ViewBag.SearchTerm"</b></span></h5>
+        <ul class="medium-12 column item-list">
+            @foreach (var course in Model.Courses)
+            {
+                <li class="medium-12 column search-item">
+                    <div class="course-flex medium-12 columns">
+                        <div class="medium-3 column hide-for-small-only course-thumbnail">
+                            <img src="@Url.Action("GetThumbnail", "Courses", new { area = "Library", courseId = course.Id })">
+                        </div>
+                        <div class="medium-9 columns course-info">
+                            <div class="medium-8 columns left">
+                                <a class="title" href="@Url.Action("Detail","Courses",new{area="Library",courseId=course.Id})">@course.Title</a>
+                                <a class="author" href="@Url.Action("Index","Member",new{area="",userName=course.Author.UserName})">
+                                    <span class="sub">by</span>@course.Author.UserProfile.FullName
+                                </a>
+                                <p class="duration">
+                                    <i class="fa fa-clock-o"></i>@course.Duration
+                                </p>
+                            </div>
+                            <div class="medium-4 columns right">
+                                @{
+                                    var sCount = course.CourseReviews.Count();
+                                    sCount = sCount == 0 ? 1 : sCount;
+                                    var stSum = course.CourseReviews.Sum(c => c.Stars);
+                                    var avgStars = (decimal)stSum / sCount;
+                                }
+                                <p class="rating hide-for-small-only">
+                                    @if (avgStars > 0)
+                                    {
+                                        @Html.Partial("_RatingStars", new StarsModel { Count = sCount, Sum = stSum })
+
+                                        <span style="font-size: 0.9em; color: #000">@avgStars</span>
+                                        <span style="font-size: 0.9em; color: #8d8d8d">(@sCount)</span>
+                                    }
+                                    else
+                                    {
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                    }
+
+                                </p>
+
+                                <p class="price">
+                                    $@course.Price
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+                </li>
+                                    }
+        </ul>
+        <ul class="medium-12 column pagination float-center" role="navigation" aria-label="Pagination">
+            <li>
+                <a class="prev @(Model.HavePrev ? "" : "disabled")" href="@Url.Action("Result","Home",new{area="",searchTerm=ViewBag.SearchTerm,page=Model.PrevPage})" aria-label="Previous page">Previous <span class="show-for-sr">page</span></a>
+            </li>
+            @for (int i = Model.Start; i <= Model.End; i++)
+            {
+                <li><a class="@(Model.Page == i ? "current" : "")" href="@Url.Action("Result", "Home", new { area = "", searchTerm = ViewBag.SearchTerm, page = i })" aria-label="Page @i">@i</a></li>
+               
+            }
+            @if (Model.HaveMore)
+            {
+                <li class="ellipsis" aria-hidden="true"></li>
+            }
+            <li>
+                <a class="next  @(Model.HaveNext ? "" : "disabled")" href="@Url.Action("Result", "Home", new {area = "", searchTerm = ViewBag.SearchTerm, page = Model.NextPage})" aria-label="Next page">
+                    Next <span class="show-for-sr">page</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

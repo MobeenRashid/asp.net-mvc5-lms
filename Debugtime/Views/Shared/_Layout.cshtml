@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>@ViewBag.Title- debugtime</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    @Styles.Render("~/Content/Styles")
+    <style>
+        .Icon--zendesk svg {
+            visibility:hidden !important;
+        }
+    </style>
+    
+    <script>
+/*<![CDATA[*/window.zEmbed||function(e,t){var n,o,d,i,s,a=[],r=document.createElement("iframe");window.zEmbed=function(){a.push(arguments)},window.zE=window.zE||window.zEmbed,r.src="javascript:false",r.title="",r.role="presentation",(r.frameElement||r).style.cssText="display: none",d=document.getElementsByTagName("script"),d=d[d.length-1],d.parentNode.insertBefore(r,d),i=r.contentWindow,s=i.document;try{o=s}catch(e){n=document.domain,r.src='javascript:var d=document.open();d.domain="'+n+'";void(0);',o=s}o.open()._l=function(){var e=this.createElement("script");n&&(this.domain=n),e.id="js-iframe-async",e.src="https://assets.zendesk.com/embeddable_framework/main.js",this.t=+new Date,this.zendeskHost="debugtimehelp.zendesk.com",this.zEQueue=a,this.body.appendChild(e)},o.write('<body onload="document._l();">'),o.close()}();
+/*]]>*/</script>
+
+</head>
+<body>
+    <nav class="dtm-top-bar dtm-primary-nav" style="margin: 0">
+        <div class="primary-nav-left">
+            <a href="#" id="primaryMenuBar" class="hamburger-menu"> <i class="fa fa-bars"></i></a>
+
+            <div class="site-title">
+                <a href="/" class="dtm-brand-name">
+                    <span class="dtm-first-name">debug</span><span class="dtm-last-name">time</span>
+                </a>
+            </div>
+        </div>
+        <div class="primary-nav-center">
+            <ul class="menu">
+                <li class="search-form">
+                    @Html.Partial("_SearchForm")
+                </li>
+                <li>
+                    <a href="@Url.Action("Index", "Courses", new {area = "Library"})">Courses</a>
+
+                </li>
+                <li> <a href="@Url.Action("Featured", "Courses", new {area = "Library"})">Featured</a></li>
+                <li><a href="@Url.Action("Latest", "Courses", new {area = "Library"})">Latest</a></li>
+            </ul>
+        </div>
+        <div class="primary-nav-right">
+            @Html.Partial("_LoginPartial")
+        </div>
+    </nav>
+    @Html.Partial("_MobileNavPartial")
+
+    <div class="row body-content">
+        @RenderBody()
+    </div>
+    <footer class="row footer">
+        <div class="medium-3 column company-name">
+            <div class="group">
+                <a class="name"><span class="first">debug</span><span class="second">time</span></a>
+                <p>an Education Company</p>
+                <h6>&copy; 2017 debugtime, Inc</h6>
+            </div>
+        </div>
+        <div class="medium-3 column links">
+            <ul>
+                <li>
+                    <a href="@Url.Action("Index","Courses",new { area="Library"})">Courses</a>
+                </li>
+                <li>
+                    <a href="#">Featured</a>
+                </li>
+                <li>
+                    <a href="#">Latest</a>
+                </li>
+            </ul>
+
+        </div>
+
+        <div class="medium-3 column links">
+            <ul>
+                <li>
+                    <a href="@Url.Action("AboutUs","Home",new { })">About Us</a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Terms","Home",new {})">Terms & Privacy</a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Support","Home",new {})">Support</a>
+                </li>
+            </ul>
+
+        </div>
+
+        <div class="medium-3 column social-links">
+            <ul>
+                <li>
+                    <a href="https://twitter.com/debugtime" target="_blank">
+                        <i class="fa fa-twitter"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.youtube.com/c/debugtime" target="_blank">
+                        <i class="fa fa-youtube-play"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.facebook.com/debugtime/" target="_blank">
+                        <i class="fa fa-facebook"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://plus.google.com/+debugtime" target="_blank">
+                        <i class="fa fa-google-plus"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+    @Scripts.Render("~/Content/Scripts")
+    @RenderSection("scripts", false)
+</body>
+</html>

@@ -1,0 +1,52 @@
+﻿@using Debugtime.Common.Model.View
+@model Debugtime.Common.Model.View.UserQuizResultViewModel
+
+@{
+    ViewBag.Title = "Assessment Result";
+    Layout = "~/Views/Shared/_MinimalLayout.cshtml";
+}
+<div class="medium-12 column qrc">
+    <div class="qr medium-8 column medium-push-2">
+        <h4 class="caption">Assessment Result</h4>
+        <div class="medium-10  medium-push-1 column status-alert">
+            @if (Model.Succeeded)
+            {
+                <h6 class="callout success">Congratuelations! you passed the test successfully.</h6>
+            }
+            else
+            {
+                <h6 class="callout alert">Oops! you failed to pass the test.</h6>
+            }
+        </div>
+        <div class="medium-12 column header">
+            <h5 class="title float-center"><span class="badge">Quiz</span>@Model.Title</h5>
+        </div>
+
+        <div class="medium-10 medium-push-1 column result-detail">
+            <table>
+                <tr>
+                    <td>Status</td>
+                    <td>@Model.Status</td>
+                </tr>
+                <tr>
+                    <td>Passing Score</td>
+                    <td>@Model.PassingScore</td>
+                </tr>
+                <tr>
+                    <td>Your Score</td>
+                    <td>@Model.YourScore</td>
+                </tr>
+            </table>
+        </div>
+        <div class="medium-12 column footer">
+            @if (Model.Succeeded)
+            {
+                <a href="/dashboard" class="button float-right">View Badge</a>
+            }
+            else
+            {
+                <a href="@Url.Action("Play", "Studio", new { area = "", courseId = Model.QuizId })" class="button secondary float-right">Go to Course</a>
+            }
+        </div>
+    </div>
+</div>

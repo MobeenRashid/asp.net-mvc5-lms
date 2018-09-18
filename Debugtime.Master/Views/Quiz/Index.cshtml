@@ -1,0 +1,110 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+
+<link href="~/Content/Styles/manage-courses.css" rel="stylesheet" />
+
+<div class="app-heading app-heading-bordered app-heading-page">
+    <div class="icon icon-lg">
+        <span class="icon-user-plus"></span>
+    </div>
+    <div class="title">
+        <h2>Quiz Manager</h2>
+        <p>All Quizes</p>
+    </div>
+
+</div>
+<div class="app-heading-container app-heading-bordered bottom">
+    <ul class="breadcrumb">
+        <li><a href="~/Panel/Index">Dashboard</a></li>
+        <li><a href="~/Courses/Index">Quiz Manager</a></li>
+        <li class="active">All Quizes</li>
+    </ul>
+</div>
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-md-1"></div>
+
+        <div class="col-md-8">
+           
+            <div class="card">
+                <div class="card-block">
+                    <div class="media m-b-05">
+                        <div class="media-left media-middle">
+                            <a href="instructor-quiz.html">
+                                <img src="~/Content/img/courses/vuejs.png" alt="Card image cap" width="120" class="img-rounded">
+                            </a>
+                        </div>
+                        <div class="media-body media-middle">
+                            <h2 class="card-title">Vue.js Deploy Quiz</h2>
+                            <small class="text-muted">1 Completed</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer" style="background-color:#F5F5F5; padding:12px">
+                    <a href="#" class="btn btn-info pull-xs-right"><i class="icon-file-check"></i> Review <span class="label text-primary bg-white">1</span></a>
+                    <a href="#" class="btn btn-default btn-sm pull-right"><i class="icon-pencil3"></i> Edit </a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-block">
+                    <div class="media m-b-05">
+                        <div class="media-left media-middle">
+                            <a href="instructor-quiz.html">
+                                <img src="~/Content/img/courses/vuejs.png" alt="Card image cap" width="120" class="img-rounded">
+                            </a>
+                        </div>
+                        <div class="media-body media-middle">
+                            <h2 class="card-title">Vue.js Deploy Quiz</h2>
+                            <small class="text-muted">1 Completed</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer" style="background-color:#F5F5F5; padding:12px">
+                    <a href="#" class="btn btn-info pull-xs-right"><i class="icon-file-check"></i> Review <span class="label text-primary bg-white">1</span></a>
+                    <a href="#" class="btn btn-default btn-sm pull-right"><i class="icon-pencil3"></i> Edit </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-success btn-lg pull-right" ><i class="icon-plus-circle"></i> Add New</button>
+           
+        </div>
+        <div class="cols-md-1"></div>
+
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <br />
+            <br />
+            <ul class="pagination">
+                <li class="disabled">
+                    <a href="~/Courses/Edit" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="active"><a href="~/Courses/Edit">1</a></li>
+                <li><a href="~/Courses/Edit">2</a></li>
+                <li><a href="~/Courses/Edit">3</a></li>
+                <li><a href="~/Courses/Edit">4</a></li>
+                <li><a href="~/Courses/Edit">5</a></li>
+                <li>
+                    <a href="~/Courses/Edit" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<style>
+    a {
+        text-decoration: none !important;
+    }
+</style>

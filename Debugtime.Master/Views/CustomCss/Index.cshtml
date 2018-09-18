@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+
+<div class="app-heading app-heading-bordered app-heading-page">
+    <div class="icon icon-lg">
+        <span class="icon-code"></span>
+    </div>
+    <div class="title">
+        <h1>Custom CSS</h1>
+        <p>Add Custom Css to Change desgin of the elements.</p>
+    </div>
+</div>
+<div class="app-heading-container app-heading-bordered bottom">
+    <ul class="breadcrumb">
+        <li><a href="#">Dashboard</a></li>
+        <li><a href="#">Custom Css</a></li>
+        <li class="active">Add Custom Css</li>
+    </ul>
+</div>
+<!-- END PAGE HEADING -->
+<!-- START PAGE CONTAINER -->
+<div class="container">
+    <div class="block">
+
+        <div class="app-heading app-heading-small">
+            <div class="title">
+                <h5>Main CSS</h5>
+                <p>Write here the CSS rules you want to apply to the whole website.</p>
+            </div>
+        </div>
+
+        <textarea id="codeEditor">
+            .anyclass{
+            background-color: #fff;
+            display:block;
+            }
+        </textarea>
+
+    </div>
+
+</div>
+<!-- END PAGE CONTAINER -->
+<!-- CODEMIRROR -->
+<script type='text/javascript' src="~/Scripts/codemirror/codemirror.js"></script>
+
+<script type='text/javascript' src="~/Scripts/codemirror/css.js"></script>
+<!-- END CODEMIRROR -->
+
+<script>
+            var editor = CodeMirror.fromTextArea(document.getElementById("codeEditor"), {
+                lineNumbers: true,
+                matchBrackets: true,
+                mode: "application/x-httpd-php",
+                indentUnit: 4,
+                indentWithTabs: true,
+                enterMode: "keep",
+                tabMode: "shift"
+            });
+            editor.setSize('100%','700px');
+</script>

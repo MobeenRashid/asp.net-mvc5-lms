@@ -1,0 +1,135 @@
+﻿
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+
+  <!-- START PAGE HEADING -->
+<div class="app-heading app-heading-bordered app-heading-page">
+    <div class="icon icon-lg">
+        <span class="icon-user-plus"></span>
+    </div>
+    <div class="title">
+        <h2>Profile</h2>
+        <p>Check or Update Your Profile</p>
+    </div>
+    <!--<div class="heading-elements">
+        <a href="#" class="btn btn-danger" id="page-like"><span class="app-spinner loading"></span> loading...</a>
+    </div>-->
+</div>
+<div class="app-heading-container app-heading-bordered bottom">
+    <ul class="breadcrumb">
+        <li><a href="#">Dashboard</a></li>
+        <li><a href="#">Users</a></li>
+        <li class="active">Your Profile</li>
+    </ul>
+</div>
+<!-- END PAGE HEADING -->
+<!-- START PAGE CONTAINER -->
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-8">
+
+            <!-- LENGTH EXAMPLE -->
+            <div class="block">
+
+                    <div class="title">
+                        <h1>Personal Options</h1>
+                    </div>
+                <form action="#">
+                    <div class="form-group">
+                        <label>Username</label>
+                        <i> (Usernames cannot be changed.)</i>
+                        <input class="form-control" data-validation="alphanumeric" placeholder="a-z 0-9" value="admin" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label>First Name</label>
+                        <input type="text" class="form-control" value="Jessica">
+                    </div>
+                    <div class="form-group">
+                        <label>Last Name</label>
+                        <input type="text" class="form-control" value="Brown">
+                    </div>
+                    <div class="title">
+                        <h1>Contact Info</h1>
+                    </div>
+                    <div class="form-group">
+                        <label>E-mail</label>
+                        <input class="form-control" data-validation="email" value="youremail@domain.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Website</label>
+                        <input class="form-control" data-validation="url" value="www.domain.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Google+</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">www.googleplus.com/</span>
+                            <input type="text" class="form-control" value="Username">
+                        </div>
+                        </div>
+                    <div class="form-group">
+                        <label>Twitter</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">www.twitter.com/</span>
+                            <input type="text" class="form-control" value="Username">
+                        </div>
+                        </div>
+                    <div class="form-group">
+                        <label>Facebook</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">www.facebook.com/</span>
+                            <input type="text" class="form-control" value="Username">
+                        </div>
+                        </div>
+                    <div class="title">
+                        <h1>About Yourself</h1>
+                    </div>
+                    <div class="form-group">
+                        <label>Biographical Info</label>
+                            <textarea class="form-control" rows="5"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Profile Picture</label><br/>
+                        <input type="file" class="file" data-validation="mime size" data-validation-allowing="jpg, png, gif" data-validation-max-size="2M">
+                    </div>
+                    <div class="title">
+                        <h1>Account Management </h1>
+                    </div>
+
+                        <div class="form-group">
+                            <label>New Password</label>
+                            <input type="password" class="form-control" required>
+                        </div>
+                    <div class="form-group">
+                        <label>Confirm New Password</label>
+                        <input type="password" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Sessions</label><br/>
+                        <button type="button" class="btn btn-danger">LogOut Everywhere Else</button><br/>
+                        <i>Did you lose your phone or leave your account logged in at a public computer? You can log out everywhere else, and stay logged in here.
+</i>
+                        </div>
+
+                        <div class="form-group margin-top-20">
+                            <button class="btn btn-primary" type="submit">Submit</button>
+                        </div>
+</form>
+
+            </div>
+            <!-- END LENGTH EXAMPLE -->
+
+        </div>
+        <div class="col-md-2">
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript" src="~/Content/Scripts/jquery.min.js"></script>

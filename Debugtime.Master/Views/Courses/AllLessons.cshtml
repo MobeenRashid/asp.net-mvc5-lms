@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Debugtime.Master.Models.Input.VideoInputModel>
+@{
+    ViewBag.Title = "AllLessons";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+
+
+<div class="app-heading app-heading-bordered app-heading-page">
+    <div class="icon icon-lg">
+        <span class="icon-user-plus"></span>
+    </div>
+    <div class="title">
+        <h2>Course</h2>
+        <p>All Lesson Detailed</p>
+    </div>
+    <!--<div class="heading-elements">
+        <a href="~/Courses/Edit" class="btn btn-danger" id="page-like"><span class="app-spinner loading"></span> loading...</a>
+    </div>-->
+</div>
+<div class="app-heading-container app-heading-bordered bottom">
+    <ul class="breadcrumb">
+        <li><a href="~/Panel/Index">Dashboard</a></li>
+        <li class="active">Lessons</li>
+    </ul>
+</div>
+
+<div class="container">
+    <div class="block block-condensed">
+        <div class="margin-top-10"></div>
+        <div class="block-content">
+
+            <table class="table table-striped table-bordered datatable-extended">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Section Title</th>
+                        <th>Path</th>
+                        <th>Is Free</th>
+                        <th>Is Deleted</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+            {
+                        <tr>
+                            <td>@item.Title</td>
+                            @*<td><a href="~/Statement/Invoice">#1244</a></td>*@
+                            <td><a>@item.SectionTitle</a></td>
+                            <td>@item.Path</td>
+                            <td>@item.IsFree</td>
+                            <td>@item.IsDeleted</td>
+                            <td>
+                                <a href="@Url.Action("EditLesson","Courses",new{ id=item.CourseSectionId})" class="btn btn-default btn-icon">
+                                    <span class="fa fa-pencil"></span>
+                                </a>
+
+                                <button data-id="@item.Id" class="btn btn-default btn-icon js-del">
+                                    <span class="fa fa-times"></span>
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,190 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>DebugTime - Blog</title>
+
+    <!-- META SECTION -->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <!-- END META SECTION -->
+    <!-- CSS INCLUDE -->
+    <link rel="stylesheet" href="~/Content/Styles/admin_default.css">
+    <link href="~/Content/Styles/admin_site.css" rel="stylesheet" />
+    <link href="~/Content/Styles/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/Styles/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/Styles/site.css" rel="stylesheet" />
+    <!-- EOF CSS INCLUDE -->
+</head>
+<body>
+
+    <!-- APP WRAPPER -->
+    <div class="app">
+
+        <!-- START APP CONTAINER -->
+        <div class="app-container">
+            <!-- START APP HEADER -->
+            <div class="app-header">
+                <div class="container container-boxed">
+                    <ul class="app-header-buttons visible-mobile">
+                        <li><a href="#" class="btn btn-link btn-icon" data-navigation-horizontal-toggle="true"><span class="icon-menu"></span></a></li>
+                    </ul>
+                    <div class="blog-title pull-left">
+                        <a href="~/Panel/Index" class="dtm-brand-name">
+                            <span class="dtm-first-name">debug</span><span class="dtm-last-name">time</span>
+                        </a>
+                    </div>
+                    <ul class="app-header-buttons pull-right">
+                        <li>
+                            <div class="contact contact-rounded contact-bordered contact-lg contact-ps-controls">
+                                <img src="~/Content/assets/images/users/user_1.jpg" alt="John Doe">
+                                <div class="contact-container">
+                                    <a href="#">John Doe</a>
+                                    <span>Administrator</span>
+                                </div>
+                                <div class="contact-controls">
+                                    <div class="dropdown">
+                                        <button type="button" class="btn btn-default btn-icon" data-toggle="dropdown"><span class="icon-cog"></span></button>
+                                        <ul class="dropdown-menu dropdown-left">
+                                            <li><a href="#"><span class="icon-cog"></span> Settings</a></li>
+                                            <li><a href="#"><span class="icon-envelope"></span> Messages <span class="label label-danger pull-right">+24</span></a></li>
+                                            <li><a href="#"><span class="icon-users"></span> Contacts <span class="label label-default pull-right">76</span></a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="#"><span class="icon-exit-right"></span> Log Out</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- END APP HEADER  -->
+            <!-- START APP CONTENT -->
+            <div class="app-content">
+                <div class="app-navigation-horizontal margin-bottom-15">
+                    <div class="container container-boxed">
+                        <nav>
+                            <ul>
+                                <li>
+                                    <a href="~/Home/Index"><span class="icon-earth"></span> Home</a>
+                              
+                                </li>
+                                <li>
+                                    <a href="#"><span class="icon-sync"></span> Category</a>
+                                    <ul>
+                                        <li><a href="~/Categories/Index">Category 1</a></li>
+                                        <li><a href="~/Categories/Index">Category 2</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="~/Post/Index"><span class="icon-cog"></span> Single Post</a>
+                               
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+
+                <div>
+                    @RenderBody()
+                </div>
+
+            </div>
+
+            <!-- END APP CONTENT -->
+
+        </div>
+        <!-- END APP CONTAINER -->
+        <!-- START APP FOOTER -->
+        <div class="app-footer app-footer-default" id="footer">
+
+            <div class="container container-boxed">
+                <div class="app-footer-line">
+                    <div class="copyright wide text-center">&copy; 2017 DebugTime. All right reserved.</div>
+                </div>
+            </div>
+
+        </div>
+        <!-- END APP FOOTER -->
+    </div>
+    <!-- END APP WRAPPER -->
+    <!-- START SCRIPTS -->
+    <script type="text/javascript" src="~/Content/Scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Content/Scripts/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="~/Content/Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Content/Scripts/moment.min.js"></script>
+
+    <script type="text/javascript" src="~/Content/Scripts/jquery.mCustomScrollbar.min.js"></script>
+    <script type="text/javascript" src="~/Content/Scripts/bootstrap-select.js"></script>
+    <script type="text/javascript" src="~/Content/Scripts/bootstrap-datetimepicker.js"></script>
+
+    <script type="text/javascript" src="~/Content/Scripts/jquery.maskedinput.min.js"></script>
+    <script type="text/javascript" src="~/Content/Scripts/jquery.form-validator.min.js"></script>
+
+    <script type="text/javascript" src="~/Content/Scripts/jquery.noty.packaged.js"></script>
+
+    <script type="text/javascript" src="~/Content/Scripts/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="~/Content/Scripts/dataTables.bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="~/Content/Scripts/sweetalert.min.js"></script>
+    <script type="text/javascript" src="~/Content/Scripts/jquery.knob.min.js"></script>
+
+    <script type="text/javascript" src="~/Content/Scripts/jquery-jvectormap.min.js"></script>
+    <script type="text/javascript" src="~/Content/Scripts/jquery-jvectormap-world-mill-en.js"></script>
+    <script type="text/javascript" src="~/Content/Scripts/jquery-jvectormap-us-aea-en.js"></script>
+
+    <script type="text/javascript" src="~/Content/Scripts/jquery.sparkline.min.js"></script>
+
+    <script type="text/javascript" src="~/Content/Scripts/morris.min.js"></script>
+    <script type="text/javascript" src="~/Content/Scripts/raphael.min.js"></script>
+
+    <script type="text/javascript" src="~/Content/Scripts/d3.v3.js"></script>
+    <script type="text/javascript" src="~/Content/Scripts/rickshaw.min.js"></script>
+
+    <script type="text/javascript" src="~/Content/Scripts/isotope.pkgd.min.js"></script>
+
+
+    <script type="text/javascript" src="~/Content/Scripts/app.js"></script>
+    <script type="text/javascript" src="~/Content/Scripts/app_demo.js"></script>
+    <script type="text/javascript" src="~/Content/Scripts/app_plugins.js"></script>
+    <!-- END SCRIPTS -->
+    <script type="text/javascript" src="~/Content/Scripts/app_demo_dashboard.js"></script>
+    <!-- END SCRIPTS -->
+
+
+    <style>
+        .blog-title .dtm-brand-name {
+            margin-top: 10px;
+            line-height: 60px;
+        }
+
+        .dtm-brand-name .dtm-first-name {
+            color: #f1a226;
+        }
+
+        .dtm-brand-name {
+            padding-left: 10px;
+            font-weight: bold;
+            font-variant-caps: normal;
+            font-size: 0.9em;
+            font-family: "Segoe UI";
+            position: relative;
+            font-size: 1.8em;
+        }
+
+            .dtm-brand-name .dtm-last-name {
+                color: #000;
+            }
+
+        a {
+            text-decoration: none !important;
+        }
+    </style>
+</body>
+
+
+</html>

@@ -1,0 +1,146 @@
+﻿@model Debugtime.Common.Model.Input.UserProfileInputModel
+
+@{
+    ViewBag.Title = "Edit Bio";
+}
+
+<div class="profile-edit-container small-12 medium-11 large-10 columns float-center">
+    <div class="profile-badge-container medium-4 columns">
+        <div class="content-container">
+
+            <div class="top-container medium-12 columns">
+                <div class="avatar-container">
+                    <img src="@Url.Action("GetAvatar","Member",new { userId = User.Identity.GetUserId(),area=""})" alt="User Avatar" />
+                </div>
+                @using (Html.BeginForm("UploadAvatar", "Member", FormMethod.Post, new { @class = "dtm-form upload-avatar-form", enctype = "multipart/form-data" }))
+                {
+                    <div class="dtm-form-group">
+                        <input required type="file" id="UserAvatar" name="UserAvatar" class="dtm-form-control" value="Upload" />
+                    </div>
+                    <div class="dtm-form-group">
+                        <input type="submit" value="Upload" class="button secondary float-right" />
+                    </div>
+                }
+            </div>
+            <div class="bottom-container medium-12 columns">
+                <a href="@Url.Action("Index","Member",new { userName=User.Identity.GetUserName()})" target="_blank"><i class="fa fa-user-circle"></i> Profile</a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="profile-sections-container medium-8 columns">
+        @if (ViewBag.Success)
+        {
+            <div class="callout success">
+                <b>Success!</b> Information updated successfully.
+            </div>
+        }
+        <div class="content-container">
+            @using (Html.BeginForm("Edit", "Member", FormMethod.Post, new { @class = "dtm-form" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "Invalid Values Provided!", new { })
+
+                <div class="profile-edit-section section-basic-info medium-10 columns medium-push-1">
+
+                    <h4 class="section-title">Personal</h4>
+
+
+                    <div class="dtm-form-group medium-12 columns">
+                        <div class="medium-6 columns">
+                            @Html.LabelFor(model => model.FirstName, new { @class = "form-control-label" })
+                            @Html.TextBoxFor(model => model.FirstName, new { @class = "dtm-text-control" })
+                            @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "dtm-text-danger" })
+                        </div>
+
+                        <div class="medium-6 columns">
+                            @Html.LabelFor(model => model.LastName, new { @class = "form-control-label" })
+                            @Html.TextBoxFor(model => model.LastName, new { @class = "dtm-text-control" })
+                            @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "dtm-text-danger" })
+                        </div>
+                    </div>
+
+
+                    <div class="dtm-form-group  medium-12 columns">
+                        <div class="medium-6 columns">
+                            @Html.LabelFor(model => model.JobTitle, new { @class = "form-control-label" })
+                            @Html.TextBoxFor(model => model.JobTitle, new { @class = "dtm-text-control" })
+                            @Html.ValidationMessageFor(model => model.JobTitle, "", new { @class = "dtm-text-danger" })
+                        </div>
+
+                        <div class="medium-6 columns">
+                            @Html.LabelFor(model => model.Company, new { @class = "form-control-label" })
+                            @Html.TextBoxFor(model => model.Company, new { @class = "dtm-text-control" })
+                            @Html.ValidationMessageFor(model => model.Company, "", new { @class = "dtm-text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="dtm-form-group medium-12 columns">
+                        <div class="medium-6 columns">
+                            @Html.LabelFor(model => model.Location, new { @class = "form-control-label" })
+                            @Html.TextBoxFor(model => model.Location, new { @class = "dtm-text-control" })
+                            @Html.ValidationMessageFor(model => model.Location, "", new { @class = "dtm-text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="dtm-form-group medium-12 columns">
+                        <div class="medium-12 columns">
+                            @Html.LabelFor(model => model.ShortBio, new { @class = "form-control-label" })
+                            @Html.TextAreaFor(model => model.ShortBio, new { @class = "dtm-text-control dtm-text-area", rows = 5 })
+                            @Html.ValidationMessageFor(model => model.ShortBio, "", new { @class = "dtm-text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="dtm-form-group dtm-form-action medium-12 columns">
+                        <div class="medium-12 columns">
+                            <input type="submit" value="Save" class="button primary float-left" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profile-edit-section section-social-info medium-10 columns medium-push-1">
+                    <h4 class="section-title">Social</h4>
+
+                    <div class="dtm-form-group medium-12 columns">
+                        <div class="medium-6 columns">
+                            @Html.LabelFor(model => model.Website, new { @class = "form-control-label" })
+                            @Html.TextBoxFor(model => model.Website, new { @class = "dtm-text-control" })
+                            @Html.ValidationMessageFor(model => model.Website, "", new { @class = "dtm-text-danger" })
+                        </div>
+
+                        <div class="medium-6 columns">
+                            @Html.LabelFor(model => model.Facebook, new { @class = "form-control-label" })
+                            @Html.TextBoxFor(model => model.Facebook, new { @class = "dtm-text-control" })
+                            @Html.ValidationMessageFor(model => model.Facebook, "", new { @class = "dtm-text-danger" })
+                        </div>
+                    </div>
+
+
+                    <div class="dtm-form-group  medium-12 columns">
+                        <div class="medium-6 columns">
+                            @Html.LabelFor(model => model.LinkedIn, new { @class = "form-control-label" })
+                            @Html.TextBoxFor(model => model.LinkedIn, new { @class = "dtm-text-control" })
+                            @Html.ValidationMessageFor(model => model.LinkedIn, "", new { @class = "dtm-text-danger" })
+                        </div>
+
+                        <div class="medium-6 columns">
+                            @Html.LabelFor(model => model.GooglePlus, new { @class = "form-control-label" })
+                            @Html.TextBoxFor(model => model.GooglePlus, new { @class = "dtm-text-control" })
+                            @Html.ValidationMessageFor(model => model.GooglePlus, "", new { @class = "dtm-text-danger" })
+                        </div>
+                    </div>
+                    <div class="dtm-form-group dtm-form-action medium-12 columns">
+                        <div class="medium-12 columns">
+                            <input type="submit" value="Save" class="button primary float-left" />
+                        </div>
+                    </div>
+
+                </div>
+
+            }
+
+
+        </div>
+    </div>
+</div>

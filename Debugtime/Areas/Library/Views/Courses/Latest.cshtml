@@ -1,0 +1,118 @@
+﻿@using DebugTime.Domain.Model
+@using Microsoft.AspNet.Identity
+@using Debugtime.Common.Model.View
+@using Debugtime.Common.Static
+@using System.Linq
+@model CourseListViewModel
+@{
+    ViewBag.Title = "Latest Courses";
+}
+<div class="all-courses medium-12 columns">
+
+    <header class="header-container latest medium-12 columns" style="background: #f1a226;">
+        <div class="heading medium-12 column">
+            <h3 style="margin: 0;text-decoration: underline">Latest Courses</h3>
+        </div>
+    </header>
+    <div class="courses medium-12 column">
+        <div class="courses-container medium-12 column">
+            @foreach (var course in Model.StickerViewModel)
+            {
+                <div class="small-6 medium-6 large-4 column cc">
+                    <div class="course-badge">
+                        <div class="header">
+                            <p class="new badge">New</p>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <button role="button" class="btn-bookmark jsBookmark"
+                                        data-course-id="@course.Id" data-user-id="@User.Identity.GetUserId()">
+                                    @if (course.Bookmarks.Any(b => b.CourseId == course.Id && b.UserId == User.Identity.GetUserId()))
+                                    {
+                                        <i class="fa fa-bookmark" style="color: #da3720"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="fa fa-bookmark-o"></i>
+                                    }
+                                </button>
+                            }
+                        </div>
+
+                        <a href="@Url.Action("Detail", "Courses", new { area = "Library", CourseId=course.Id })" class="middle">
+                            <h4 class="title">@course.Title</h4>
+                            <p class="author">@course.AuthorName</p>
+                            @{
+                                var sCount = course.CourseReviews.Count();
+                                sCount = sCount == 0 ? 1 : sCount;
+                                var stSum = course.CourseReviews.Sum(c => c.Stars);
+                                var avgStars = (decimal)stSum / sCount;
+                            }
+                            <p class="rating">
+                                @if (avgStars > 0)
+                                {
+                                    @Html.Partial("_RatingStars", new StarsModel { Count = sCount, Sum = stSum })
+
+                                    <span style="font-size: 0.9em; color: #000">@avgStars</span>
+                                    <span style="font-size: 0.9em; color: #8d8d8d">(@sCount)</span>
+                                }
+                                else
+                                {
+                                    <i class="fa fa-star-o"></i>
+                                    <i class="fa fa-star-o"></i>
+                                    <i class="fa fa-star-o"></i>
+                                    <i class="fa fa-star-o"></i>
+                                    <span style="font-size: 0.9em; color: #8d8d8d">Leave a review</span>
+                                }
+
+
+                            </p>
+                        </a>
+                        <a href="@Url.Action("Detail", "Courses", new { area = "Library", CourseId=course.Id })" class="bottom">
+                            <span class="date-publish" style="color: #8d8d8d;font-size: 0.9em">@course.LastUpdate</span>
+                            @if (course.Accessibility == CourseAccessiblity.Free)
+                            {
+                                <span class="price">Free</span>
+                            }
+                            else
+                            {
+                                <span class="price">$@course.Price</span>
+                            }
+                        </a>
+                    </div>
+                </div>
+
+                                }
+        </div>
+
+    </div>
+
+</div>
+@section scripts{
+    <script type="text/javascript">
+        $(function () {
+            var $btnBookmark = $(".jsBookmark");
+            $btnBookmark.click(function () {
+                var cId = $(this).attr("data-course-id");
+                var uId = $(this).attr("data-user-id");
+                var $b = $(this);
+                $.ajax({
+                    url: "@ResourceStrings.ApiBaseAddress"+"/api/course/" + cId + "/bookmark/" + uId,
+                    type: "POST",
+                    dataType: "text json"
+                }).done(function () {
+                    if ($b.children("i").hasClass("fa-bookmark")) {
+                        $b.children("i").addClass("fa-bookmark-o").removeClass("fa-bookmark");
+                    } else if ($b.children("i").hasClass("fa-bookmark-o")) {
+                        $b.children("i").addClass("fa-bookmark").removeClass("fa-bookmark-o");
+                    }
+                }).fail(function () {
+                    if ($b.children("i").hasClass("fa-bookmark")) {
+                        $b.children("i").addClass("fa-bookmark-o").removeClass("fa-bookmark");
+                    } else if ($b.children("i").hasClass("fa-bookmark-o")) {
+                        $b.children("i").addClass("fa-bookmark").removeClass("fa-bookmark-o");
+                    }
+                });
+            });
+        });
+    </script>
+}

@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = ViewBag.Subject;
+    Layout = "../Shared/_MinimalLayout.cshtml";
+}
+<div class="bad-request-container medium-12 column">
+    <div class="medium-4 medium-push-6">
+        <h1>@ViewBag.StatusCode</h1>
+        <h3>@ViewBag.Subject</h3>
+        <p>@ViewBag.Message </p>
+        <a href="@ViewBag.HelpUrl" class="button bd-button">
+            @ViewBag.HelpText
+        </a>
+    </div>
+</div>

@@ -1,0 +1,59 @@
+﻿@using Microsoft.AspNet.Identity;
+@using Debugtime.Extentions;
+
+
+@if (!User.Identity.IsAuthenticated)
+{
+    <ul class="nav-guest-menu">
+        <li>
+            @Html.ActionLink("Sign In", "SignIn", "Account", new { area = "Security" }, new { @class = "button button-signin" })
+        </li>
+        <li>
+            @Html.ActionLink("Sign Up", "SignUp", "Account", new { area = "Security" }, new { @class = "button button-signup" })
+        </li>
+    </ul>
+}
+else
+{
+    <div class="user-profile-menu">
+        <div class="nav-profile-user">
+            <a class="profile-link">
+                <img src="@Url.Action("GetAvatar","Member",new { userId = User.Identity.GetUserId(),area=""})" class="user-avatar profile-image" />
+                <span class="user-name">@User.Identity.GetUserName()</span>
+            </a>
+        </div>
+        <ul class="nav-profile-dropdown">
+            <li>
+                <a href="@Url.Action("Index", "Dashboard", new { area = "Dashboard" })">
+                    <i class="fa fa-tachometer"></i>
+                    Dashboard
+                </a>
+            </li> 
+            <li>
+                <a href="@Url.Action("Mine", "Courses", new { area = "Library" })">
+                    <i class="fa fa-graduation-cap"></i>
+                    My Courses
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "Member", new {area="",userName = User.Identity.Name})">
+                    <i class="fa fa-user"></i>
+                    View Bio
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("Edit", "Member", new { area = "" })">
+                    <i class="fa fa-pencil"></i>
+                    Edit Bio
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("SignOut", "Account", new {area = "Security"})">
+                    <i class="fa fa-sign-out"></i>
+                    Log Out
+                </a>
+            </li>
+        </ul>
+    </div>
+
+}

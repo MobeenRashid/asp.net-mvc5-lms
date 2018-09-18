@@ -1,0 +1,431 @@
+﻿@using System.Linq
+@using System.Text.RegularExpressions
+@using Debugtime.Common.Model.View
+@using Microsoft.AspNet.Identity
+@model CourseDetailViewModel
+
+@helper GetUserStars(int uCount, int rStars)
+{
+while (uCount > 0)
+{
+        <i class="fa fa-star"></i>
+    --uCount;
+}
+
+while (rStars > 0)
+{
+        <i class="fa fa-star-o"></i>
+    --rStars;
+}
+}
+@{
+    ViewBag.Title = Model.Title;
+    var tagsArr = Regex.Split(Model.Tags, @"\|\|");
+    var desArr = Regex.Split(Model.Description, @"\|\|");
+    var agArr = Regex.Split(Model.AgendaItems, @"\|\|");
+    int i = 0;
+    var rSum = Model.CourseReviews.Sum(c => c.Stars);
+    var rCount = Model.CourseReviews.Count;
+    var dCount = (decimal)rCount;
+    rCount = rCount == 0 ? 1 : rCount;
+    dCount = dCount == 0 ? 1 : dCount;
+    var r5Count = Model.CourseReviews.Count(c => c.Stars == 5);
+    var r4Count = Model.CourseReviews.Count(c => c.Stars == 4);
+    var r3Count = Model.CourseReviews.Count(c => c.Stars == 3);
+    var r2Count = Model.CourseReviews.Count(c => c.Stars == 2);
+    var r1Count = Model.CourseReviews.Count(c => c.Stars == 1);
+
+    var orderedSections = Model.CourseSections.OrderBy<CourseSectionViewModel, int>(c => c.Order).ToList();
+}
+
+<div id="topContainer" class="dtm-top-container" style="background-image: url(../../Content/Images/course-cover.jpg);">
+    <div class="color-overlay">
+        <div class="dtm-tag-container">
+
+            @foreach (var tag in tagsArr)
+            {
+
+                if (i == 0)
+                {
+                    ++i;
+                    <a class="dtm-tag">
+                        <i class="tag-icon fa fa-tag"></i>
+                        @tag.Trim()
+                    </a>
+                }
+                else
+                {
+                    <a class="dtm-tag">
+                        @tag.Trim()
+                    </a>
+                }
+            }
+        </div>
+        <div class="dtm-heading-container">
+            <h1 class="course-title">
+                @Model.Title
+                <i class="fa fa-lock"></i>
+            </h1>
+            <p class="rating">
+                @Html.Partial("_RatingStars", new StarsModel { Count = rCount, Sum = rSum })
+                <span class="reviews">@Model.CourseReviews.Count reviews</span>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a href="#courseReview" class="add-review">Add Review</a>
+                }
+            </p>
+        </div>
+        <div class="course-start">
+            <div style="overflow: auto">
+                <a href="@Url.Action("ConfirmPurchase","Purchase",new{area="Cart",cId=Model.Id})" class="button float-right medium-4 large-3 small-6">
+                    <i class="fa fa-lock"></i>
+                    Enroll Now
+                </a>
+            </div>
+            <p class="ste">@Model.UserCount Students enrolled</p>
+        </div>
+
+    </div>
+</div>
+
+<div class="dtm-course-container medium-11 columns">
+    <div class="dtm-left-container">
+
+        <div class="medium-12 columns">
+            @Html.Partial("_MediaPlayer", Model.PlayerModel)
+        </div>
+
+        <div class="course-description medium-12 columns">
+            <section>
+                <h4>Summary</h4>
+                @foreach (var des in desArr)
+                {
+                    <p class="summary">@des.Trim()</p>
+                }
+            </section>
+            <section>
+                <h4>What you'll Learn</h4>
+                <ul class="agenda-items">
+                    @foreach (var item in agArr)
+                    {
+                        <li>@item.Trim()</li>
+                    }
+                </ul>
+            </section>
+        </div>
+        <div class="course-outline medium-12 columns">
+            <header class="course-curriculum">
+                <h4>Course Curriculum</h4>
+                <h5>
+                    <span>@orderedSections.Count Sections</span> |
+                    <span>@orderedSections.Sum(c=>c.Videos.Count) Videos</span> |
+                    <span>@Model.Duration</span>
+                </h5>
+            </header>
+            <div class="video-contents">
+                @foreach (var cSection in orderedSections)
+                {
+                    <div class="section-header">
+                        <h5><b>Section @cSection.Order :</b>  @cSection.Title</h5>
+                    </div>
+                    foreach (var vid in cSection.Videos)
+                    {
+                        <div class="section-lesson">
+                            @if (vid.IsFree)
+                            {
+                                <a href="@Url.Action("Play","Studio",new{area="",courseId=Model.Id,section=cSection.Order,lesson=vid.Order})" class="btn-rounded free">Free</a>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("ConfirmPurchase","Purchase",new{area="Cart",cId=Model.Id})" class="btn-rounded premium">Premium</a>
+                            }
+                            <h6 class="title">@vid.Title</h6>
+                            <span class="lenght">@vid.Duration</span>
+                            <a href="@Url.Action("Play","Studio",new{ area="", courseId=Model.Id,section=cSection.Order,lesson=vid.Order})" class="action hide-for-small-only">
+                                <i class="fa fa-play-circle"></i>
+                            </a>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="dtm-right-container">
+        <div class="info-container">
+            <div class="author-info">
+                <h5>Author Info</h5>
+                <img class="author-avatar" src="@Url.Action("GetAvatar","Member",new{area="" , userId=Model.AuthorModel.Id})" />
+                <a href="@Url.Action("Index","Member",new{area="" ,userName=Model.AuthorModel.UserName})" class="author-name">@Model.AuthorModel.FullName</a>
+                <p class="author-description">
+                    @Model.AuthorModel.ShortBio
+                </p>
+            </div>
+            <hr class="section-divider" />
+            <div class="course-info">
+                <h5>Course Info</h5>
+                <table class="course-info">
+                    <tr>
+                        <td class="left">Level</td>
+                        <td class="right">@Model.Level</td>
+                    </tr>
+                    <tr>
+                        <td class="left">Rating</td>
+                        <td class="right stars">
+                            @if (rSum > 0)
+                            {
+                                @Html.Partial("_RatingStars", new StarsModel { Count = rCount, Sum = rSum })
+                            }
+                            else
+                            {
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="left">Duration</td>
+                        <td class="right">@Model.Duration</td>
+                    </tr>
+                    <tr>
+                        <td class="left">Price</td>
+                        <td class="right">$@Model.Price</td>
+                    </tr>
+                    <tr>
+                        <td class="left">Released</td>
+                        <td class="right">@Model.DateCreated.ToString("yyyy MMMM dd")</td>
+                    </tr>
+                    <tr>
+                        <td class="left">Last Updated</td>
+                        <td class="right">@Model.DateModified.ToString("yyyy MMMM dd")</td>
+                    </tr>
+                </table>
+            </div>
+            <hr class="section-divider" />
+            <div class="share-course">
+                <h5>Share Course</h5>
+                <div class="share-container">
+                    <div class="section">
+                        <a href="#"><i class="fa fa-facebook-official fa-2x" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="section">
+                        <a href="#"><i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="section">
+                        <a href="#"><i class="fa fa-google-plus-square fa-2x" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="section">
+                        <a href="#"><i class="fa fa-linkedin-square fa-2x" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    @if (User.Identity.IsAuthenticated && Model.CourseReviews.All(r => r.UserId != User.Identity.GetUserId()))
+    {
+        <div id="courseReview" class="medium-9 columns">
+            <section class="medium-12 columns">
+                <div class="submit-review medium-12 columns">
+                    <h3>Submit a Review</h3>
+                    <p class="rating">
+                        <i class="fa fa-star-o rStar-1"></i>
+                        <i class="fa fa-star-o rStar-2"></i>
+                        <i class="fa fa-star-o rStar-3"></i>
+                        <i class="fa fa-star-o rStar-4"></i>
+                        <i class="fa fa-star-o rStar-5"></i>
+                        <span class="tip">Press star to rate</span>
+                    </p>
+                    @using (Html.BeginForm("AddReview", "Courses", FormMethod.Post))
+                {
+                        @Html.Hidden("CourseId", Model.Id)
+                        @Html.Hidden("userStars", null, new { id = "userStars" })
+                        <textarea id="userReview" name="userReview" class="review-text" placeholder="your review" rows="5"></textarea>
+                        <button type="submit" class="button float-right button-orange">Submit</button>
+                    }
+                </div>
+            </section>
+        </div>
+    }
+    else
+    {
+        var userReview = Model.CourseReviews.SingleOrDefault(r => r.UserId == User.Identity.GetUserId());
+        if (userReview != null)
+        {
+            <div id="courseReview" class="medium-9 columns">
+                <section class="medium-12 columns">
+                    <div class="submit-review medium-12 columns">
+                        <h3>Your Review</h3>
+                        <div class="medium-6 medium-push-3">
+                            <img class="avatar-c-80 float-center" src="@Url.Action("GetAvatar", "Member" , new {area="" , userId=userReview?.UserId})" />
+
+                            <a href="@Url.Action("Index", "Member" , new { area="" , userName=User.Identity.GetUserName() })" class="author-name" style="text-align: center">@userReview.User.FullName</a>
+                            <p class="rating" style="text-align: center">
+                                @{
+                                    var uCount = userReview.Stars;
+                                    var rStars = 5 - uCount;
+                                }
+                                @GetUserStars(uCount, rStars)
+                            </p>
+                            <p class="description" style="text-align: center">
+                                @userReview.Review
+                            </p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+                                        }
+                                    }
+
+    <section class="medium-12 columns">
+        <div class="review-stats medium-12 columns">
+            <h3>Reviews</h3>
+            <div class="medium-12 columns">
+                <div class="medium-6 columns rating-breakdowns">
+                    <div class="medium-12 columns breakdown">
+                        <p class="label-star">5 stars</p>
+                        <div class="primary progress" role="progressbar" tabindex="0" aria-valuenow="25" aria-valuemin="0" aria-valuetext="25 percent" aria-valuemax="100">
+                            <div class="progress-meter" style="width: @((r5Count/dCount)*100)%">
+                            </div>
+                        </div>
+                        <p class="person-count">
+                            @r5Count
+                        </p>
+                    </div>
+                    <div class="medium-12 columns breakdown">
+                        <p class="label-star">4 stars</p>
+                        <div class="primary progress" role="progressbar" tabindex="0" aria-valuenow="25" aria-valuemin="0" aria-valuetext="25 percent" aria-valuemax="100">
+                            <div class="progress-meter" style="width: @((r4Count/dCount)*100)%">
+                            </div>
+                        </div>
+                        <p class="person-count">
+                            @r4Count
+                        </p>
+                    </div>
+                    <div class="medium-12 columns breakdown">
+                        <p class="label-star">3 stars</p>
+                        <div class="primary progress" role="progressbar" tabindex="0" aria-valuenow="25" aria-valuemin="0" aria-valuetext="25 percent" aria-valuemax="100">
+                            <div class="progress-meter" style="width: @((r3Count/dCount)*100)%">
+                            </div>
+                        </div>
+                        <p class="person-count">
+                            @r3Count
+                        </p>
+                    </div>
+                    <div class="medium-12 columns breakdown">
+                        <p class="label-star">2 stars</p>
+                        <div class="primary progress" role="progressbar" tabindex="0" aria-valuenow="25" aria-valuemin="0" aria-valuetext="25 percent" aria-valuemax="100">
+                            <div class="progress-meter" style="width: @((r2Count/dCount)*100)%">
+                            </div>
+                        </div>
+                        <p class="person-count">
+                            @r2Count
+                        </p>
+                    </div>
+                    <div class="medium-12 columns breakdown">
+                        <p class="label-star">1 stars</p>
+                        <div class="primary progress" role="progressbar" tabindex="0" aria-valuenow="25" aria-valuemin="0" aria-valuetext="25 percent" aria-valuemax="100">
+                            <div class="progress-meter" style="width: @((r1Count/dCount)*100)%">
+                            </div>
+                        </div>
+                        <p class="person-count">
+                            @r1Count
+                        </p>
+                    </div>
+
+                </div>
+                <div class="medium-4 columns average-rating float-right">
+                    <h2>@((rSum / (dCount * 5)) * 5)</h2>
+                    <p class="rating-stars">
+                        @Html.Partial("_RatingStars", new StarsModel { Count = rCount, Sum = rSum })
+                    </p>
+                    <p>@Model.CourseReviews.Count ratings</p>
+                </div>
+            </div>
+
+            <div class="user-reviews medium-12 columns">
+                @foreach (var review in Model.CourseReviews)
+                {
+                    <div class="review-segment medium-6 columns">
+                        <div class="header medium-12 columns">
+                            <img class="avatar-c-60 float-left" src="@Url.Action("GetAvatar","Member",new{area="" ,userId=review.User.Id})" />
+                            <h5>@review.User.FullName</h5>
+                            @{
+                                var uCount = review.Stars;
+                                var rStars = 5 - uCount;
+                            }
+                            <p class="rating">
+                                @GetUserStars(uCount, rStars)
+                            </p>
+                        </div>
+                        <span class="message medium-12 columns">@review.Review</span>
+                    </div>
+                                }
+            </div>
+
+        </div>
+
+    </section>
+</div>
+@section scripts{
+    <script type="text/javascript">
+        $(function () {
+            $(".rStar-1").hover(function () {
+                $(this).removeClass("fa-star-o").addClass("fa-star");
+                $("#userStars").attr("value", 1);
+
+                $(".rStar-2").removeClass("fa-star").addClass("fa-star-o");
+                $(".rStar-3").removeClass("fa-star").addClass("fa-star-o");
+                $(".rStar-4").removeClass("fa-star").addClass("fa-star-o");
+                $(".rStar-5").removeClass("fa-star").addClass("fa-star-o");
+            });
+
+            $(".rStar-2").hover(function () {
+                $(".rStar-1").removeClass("fa-star-o").addClass("fa-star");
+                $(this).removeClass("fa-star-o").addClass("fa-star");
+                $("#userStars").attr("value", 2);
+
+                $(".rStar-3").removeClass("fa-star").addClass("fa-star-o");
+                $(".rStar-4").removeClass("fa-star").addClass("fa-star-o");
+                $(".rStar-5").removeClass("fa-star").addClass("fa-star-o");
+            });
+
+
+            $(".rStar-3").hover(function () {
+                $(".rStar-1").removeClass("fa-star-o").addClass("fa-star");
+                $(".rStar-2").removeClass("fa-star-o").addClass("fa-star");
+                $(this).removeClass("fa-star-o").addClass("fa-star");
+                $("#userStars").attr("value", 3);
+
+                $(".rStar-4").removeClass("fa-star").addClass("fa-star-o");
+                $(".rStar-5").removeClass("fa-star").addClass("fa-star-o");
+            });
+
+
+            $(".rStar-4").hover(function () {
+                $(".rStar-1").removeClass("fa-star-o").addClass("fa-star");
+                $(".rStar-2").removeClass("fa-star-o").addClass("fa-star");
+                $(".rStar-3").removeClass("fa-star-o").addClass("fa-star");
+                $(this).removeClass("fa-star-o").addClass("fa-star");
+                $("#userStars").attr("value", 4);
+
+                $(".rStar-5").removeClass("fa-star").addClass("fa-star-o");
+            });
+
+
+
+            $(".rStar-5").hover(function () {
+                $(".rStar-1").removeClass("fa-star-o").addClass("fa-star");
+                $(".rStar-2").removeClass("fa-star-o").addClass("fa-star");
+                $(".rStar-3").removeClass("fa-star-o").addClass("fa-star");
+                $(".rStar-4").removeClass("fa-star-o").addClass("fa-star");
+                $(this).removeClass("fa-star-o").addClass("fa-star");
+                $("#userStars").attr("value", 5);
+            });
+
+        });
+    </script>
+}

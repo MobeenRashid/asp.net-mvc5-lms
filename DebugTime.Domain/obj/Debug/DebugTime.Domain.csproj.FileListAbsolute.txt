@@ -1,0 +1,33 @@
+C:\Users\Mubeen Rashid\Source\Repos\debugtime\debugtime\DebugTime.Domain\bin\Debug\DebugTime.Domain.dll
+C:\Users\Mubeen Rashid\Source\Repos\debugtime\debugtime\DebugTime.Domain\bin\Debug\DebugTime.Domain.pdb
+C:\Users\Mubeen Rashid\Source\Repos\debugtime\debugtime\DebugTime.Domain\obj\Debug\DebugTime.Domain.dll
+C:\Users\Mubeen Rashid\Source\Repos\debugtime\debugtime\DebugTime.Domain\obj\Debug\DebugTime.Domain.pdb
+C:\Users\Mubeen Rashid\Source\Repos\debugtime\debugtime\DebugTime.Domain\bin\Debug\DebugTime.Domain.dll.config
+C:\Users\Mubeen Rashid\Source\Repos\debugtime\debugtime\DebugTime.Domain\bin\Debug\EntityFramework.dll
+C:\Users\Mubeen Rashid\Source\Repos\debugtime\debugtime\DebugTime.Domain\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Mubeen Rashid\Source\Repos\debugtime\debugtime\DebugTime.Domain\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+C:\Users\Mubeen Rashid\Source\Repos\debugtime\debugtime\DebugTime.Domain\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\Mubeen Rashid\Source\Repos\debugtime\debugtime\DebugTime.Domain\bin\Debug\EntityFramework.xml
+C:\Users\Mubeen Rashid\Source\Repos\debugtime\debugtime\DebugTime.Domain\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Mubeen Rashid\Source\Repos\debugtime\debugtime\DebugTime.Domain\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+C:\Users\Mubeen Rashid\Source\Repos\debugtime\debugtime\DebugTime.Domain\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\Mubeen Rashid\Source\Repos\debugtime\debugtime\DebugTime.Domain\obj\Debug\DebugTime.Domain.csprojResolveAssemblyReference.cache
+F:\debugtime\debugtime\DebugTime.Domain\bin\Debug\DebugTime.Domain.dll.config
+F:\debugtime\debugtime\DebugTime.Domain\bin\Debug\DebugTime.Domain.dll
+F:\debugtime\debugtime\DebugTime.Domain\bin\Debug\DebugTime.Domain.pdb
+F:\debugtime\debugtime\DebugTime.Domain\bin\Debug\Antlr3.Runtime.dll
+F:\debugtime\debugtime\DebugTime.Domain\bin\Debug\EntityFramework.dll
+F:\debugtime\debugtime\DebugTime.Domain\bin\Debug\EntityFramework.SqlServer.dll
+F:\debugtime\debugtime\DebugTime.Domain\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+F:\debugtime\debugtime\DebugTime.Domain\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+F:\debugtime\debugtime\DebugTime.Domain\bin\Debug\Newtonsoft.Json.dll
+F:\debugtime\debugtime\DebugTime.Domain\bin\Debug\WebGrease.dll
+F:\debugtime\debugtime\DebugTime.Domain\bin\Debug\Antlr3.Runtime.pdb
+F:\debugtime\debugtime\DebugTime.Domain\bin\Debug\EntityFramework.xml
+F:\debugtime\debugtime\DebugTime.Domain\bin\Debug\EntityFramework.SqlServer.xml
+F:\debugtime\debugtime\DebugTime.Domain\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+F:\debugtime\debugtime\DebugTime.Domain\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
+F:\debugtime\debugtime\DebugTime.Domain\bin\Debug\Newtonsoft.Json.xml
+F:\debugtime\debugtime\DebugTime.Domain\obj\Debug\DebugTime.Domain.csprojResolveAssemblyReference.cache
+F:\debugtime\debugtime\DebugTime.Domain\obj\Debug\DebugTime.Domain.dll
+F:\debugtime\debugtime\DebugTime.Domain\obj\Debug\DebugTime.Domain.pdb

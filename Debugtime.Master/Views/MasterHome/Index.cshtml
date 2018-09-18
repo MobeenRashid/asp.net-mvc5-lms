@@ -1,0 +1,22 @@
+﻿@model Debugtime.Master.Models.Input.CourseInputModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+
+@using (Html.BeginForm("Index", "MasteHome", FormMethod.Post))
+{
+    <div class="dtm-form-group">
+        @Html.LabelFor(model => model.FirstName, new { @class = "form-control-label" })
+        @Html.TextBoxFor(model => model.FirstName, new { @class = "dtm-text-control" })
+    </div>
+    <br />
+    <div class="dtm-form-group">
+        <input type="submit" value="Save" class="button primary" />
+    </div>
+}
+
+
+

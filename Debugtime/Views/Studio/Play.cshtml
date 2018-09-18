@@ -1,0 +1,64 @@
+﻿@using Debugtime.Common.Model.View
+@model Debugtime.Common.Model.View.CoursePlayViewModel
+@{
+    ViewBag.Title = Model.Title;
+    ViewBag.Heading = Model.Title;
+    
+    ViewBag.Learning = true;
+
+    ViewBag.HasAssesment = Model.HasAssessment;
+
+    ViewBag.QuizId = Model.Id;
+
+    Layout = "~/Views/Shared/_AbstarctLayout.cshtml";
+
+    var orderedSections = Model.CourseSections.OrderBy(c => c.Order).ToList();
+}
+<div class="course-play-container medium-12 columns">
+    <div class="medium-10 medium-push-1 columns">
+        @Html.Partial("_MediaPlayer", Model.PlayerModel)
+    </div>
+    <h4 class="medium-10 medium-push-1 columns section-title">@Model.LessonTitle</h4>
+    <div class="medium-10 medium-push-1 columns">
+        <a href="@Url.Action("Play","Studio",new{area="",courseId=Model.Id,Lesson=Model.PrevLesson,Section=Model.PrevSection})" class="button secondary float-left @(Model.HasPrev?"":"disabled")">
+            <i class="fa fa-chevron-circle-left"></i>
+            Previous
+        </a>
+        <a href="@Url.Action("Play","Studio",new{area="",courseId=Model.Id,Lesson=Model.NextLesson,Section=Model.NextSection})" class="button next float-right @(Model.HasNext?"":"disabled")">
+            Next
+            <i class="fa fa-chevron-circle-right"></i>
+        </a>
+    </div>
+    <div class="course-outline medium-10 medium-push-1 columns">
+        <header class="course-curriculum">
+            <h4>Course Curriculum</h4>
+            <h5>
+                <span>@orderedSections.Count Sections</span> |
+                <span>@orderedSections.Sum(c => c.Videos.Count) Videos</span> |
+                <span>@Model.Duration</span>
+            </h5>
+        </header>
+        <div class="video-contents">
+            @foreach (var cSection in orderedSections)
+            {
+                <div class="section-header">
+                    <h5><b>Section @cSection.Order :</b>  @cSection.Title</h5>
+                </div>
+                foreach (var vid in cSection.Videos)
+                {
+                    <div class="section-lesson">
+
+                        <a href="@Url.Action("Play","Studio",new{area="",courseId=Model.Id,section=cSection.Order,lesson=vid.Order})" class="btn-rounded free">Play</a>
+
+                        <h6 class="title">@vid.Title</h6>
+                        <span class="lenght">@vid.Duration</span>
+                        <a href="@Url.Action("Play","Studio",new{ area="", courseId=Model.Id,section=cSection.Order,lesson=vid.Order})" class="action">
+                            <i class="fa fa-play-circle"></i>
+                        </a>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,5 @@
+﻿@using (Html.BeginForm("Result", "Home", FormMethod.Get, new { area = "", id = "searchForm", @class = "input-group" }))
+{
+    <button type="submit" class="input-group-label"><i class="fa fa-search" aria-hidden="true"></i></button>
+    <input type="search" id="searchTerm" name="searchTerm" class="input-group-field" placeholder="Search Courses" />
+}

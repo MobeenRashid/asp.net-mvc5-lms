@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>@ViewBag.Title-Debugtime</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    @Styles.Render("~/Content/Styles")
+</head>
+<body>
+    <nav class="dtm-top-bar dtm-primary-nav course-play-bar">
+        <div class="primary-nav-left">
+
+            <div class="site-title">
+                <a href="/" class="dtm-brand-name">
+                    <span class="dtm-first-name">debug</span><span class="dtm-last-name">time</span>
+                </a>
+            </div>
+        </div>
+        <div class="primary-nav-center">
+            <h4>
+                @ViewBag.Heading
+            </h4>
+            @if (ViewBag.Learning)
+            {
+                <b class="badge">Learning</b>
+            }
+            else
+            {
+                <b class="badge">Assessment</b>
+            }
+        </div>
+
+        <div class="primary-nav-right">
+            <ul class="nav-guest-menu">
+                <li>
+                    @if (ViewBag.Learning)
+                    {
+                        if (ViewBag.HasAssesment)
+                        {
+                            <a class="button button-quiz" href="@Url.Action("Index", "Assessment", new {area = "Quiz", quizId = ViewBag.QuizId,question=1})">
+                                Take Assessment
+                            </a>
+                        }
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Back to Course", "SignUp", "Account", new { area = "Security" }, new { @class = "button secondary" })
+                    }
+
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="row body-content">
+        @RenderBody()
+    </div>
+    @Scripts.Render("~/Content/Scripts")
+    @RenderSection("scripts", false)
+</body>
+</html>

@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewBag.Title = "Support";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/Styles/bootstrap/bootstrap.css" rel="stylesheet" />
+<div style="background-image: url('../../Content/Images/contactbg.jpg'); margin-bottom:-10px;">
+    <h2 class="float-center text-center" style="color: #fff; padding-top:10%;">Contact DebugTime</h2>
+   <div style="background-color:#fff !important; border-top:5px solid #F1A52D;  height:50%;" class="hamza">
+       <div style="margin:40px;">
+
+           <form action="#"  method="post">
+               <input name="__RequestVerificationToken" type="hidden" value="iJv6Awnu57Sn0Y6Qpmxpx4AMa76j5L8h-tyWq-djpyGO4ab9CjBj1MsMibuY8gYbttRC59qG09jRI9aH94eL232DxBQTkNSuaa_oQoA-ciU1">                
+               <div class="col-md-6">
+                   <input class="dtm-text-control" data-val="true" data-val-maxlength="Maximum 20 characters are allowed." data-val-maxlength-max="20" data-val-minlength="Atleast 2 characters are required." data-val-minlength-min="2" data-val-required="First Name is required." id="FirstName" name="FirstName" placeholder="First Name*" type="text" value="">
+                   <span class="field-validation-valid dtm-text-danger" data-valmsg-for="FirstName" data-valmsg-replace="true"></span>
+               </div>
+             <!--  <div class="dtm-form-group column medium-6"> -->
+               <div class="col-md-6">
+                   <input class="dtm-text-control" data-val="true" data-val-maxlength="Maximum 20 characters are allowed." data-val-maxlength-max="20" data-val-minlength="Atleast 2 characters are required." data-val-minlength-min="2" data-val-required="Last Name is required" id="LastName" name="LastName" placeholder="Last Name*" type="text" value="">
+                   <span class="field-validation-valid dtm-text-danger" data-valmsg-for="LastName" data-valmsg-replace="true"></span>
+                   <!-- </div>-->
+               </div>
+               <div class="col-md-6">
+                   <input class="dtm-text-control" data-val="true" data-val-email="Invalid email provided." data-val-required="Email is required." id="Email" name="Email" placeholder="Email*" type="email" value="">
+                   <span class="field-validation-valid dtm-text-danger" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+               </div>
+               <div class="col-md-6">
+                   <input class="dtm-text-control" data-val="true" data-val-maxlength="Maximum 20 characters are allowed." data-val-maxlength-max="20" data-val-minlength="Atleast 2 characters are required." data-val-minlength-min="2" data-val-required="First Name is required." id="FirstName" name="FirstName" placeholder="Subject*" type="text" value="">
+                   <span class="field-validation-valid dtm-text-danger" data-valmsg-for="Subject" data-valmsg-replace="true"></span>               </div>
+               <div class="col-md-12">
+                   <textarea class="dtm-text-control" rows="6" placeholder="Message"></textarea>
+               </div>
+               <input id="ReturnUrl" name="ReturnUrl" type="hidden" value="">                
+               <div>
+                   <input type="submit" class="button primary float-center form-signing-button" value="Submit">
+               </div>
+           </form>
+       </div>
+   </div>
+    <div style="background-color:#363636 !important; margin-top:50px; padding:40px;" class="hamza">
+            <h2 class="float-center text-center" style="color: #fff;">Customer Support</h2>
+        <h4 class="float-center text-center" style="color:rgb(187,187,187)" >+92 (347) 918-9446</h4>
+        <center> <a href="mailto:info@debugtime.com"><input type="button" value="Contact Support" class="btn-lg hamza-button" /></a></center>
+    </div><br /><br /><br /><br />
+
+    </div>
+<style>
+.hamza{
+    margin-top:20px;
+    margin-left:20%;
+    margin-right:20%;
+}
+.hamza-button{
+            font-size: 0.9em;
+            color: #F1A52D;
+            margin-top: 20px;
+            background-color: transparent;
+            border: 3px solid #F1A52D;
+            border-radius:0px;
+
+}
+    .hamza-button:hover {
+         cursor: pointer;
+
+    }
+</style>

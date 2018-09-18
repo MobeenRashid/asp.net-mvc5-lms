@@ -1,0 +1,105 @@
+﻿@model Debugtime.Common.Model.View.UserProfileViewModel
+@using Debugtime.Helpers
+
+@{
+    ViewBag.Title = Model.FullName;
+}
+
+<div class="dtm-profile-cover medium-12 columns">
+    <div class="color-overlay"></div>
+    <div class="info-heading">
+        <div class="info-container">
+            <div class="avatar-container float-center">
+                <img src="@Url.Action("GetAvatar","Member",new { userId = Model.Id ,area=""})" class="user-avatar" alt="user avatar" />
+            </div>
+            <div class="title-container">
+                <h3 class="user-name">@Model.FullName</h3>
+                @if (!String.IsNullOrEmpty(Model.JobTitle))
+                {
+                    <h6 class="job-title">@Model.JobTitle</h6>
+                }
+                @if (!String.IsNullOrEmpty(Model.Company))
+                {
+                    <h6 class="company-name"><b>Company:</b> @Model.Company</h6>
+                }
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="dtm-profile-container medium-12 columns">
+
+    <div class="profile-info-container small-12 medium-10 large-7 column">
+        <ul class="profile-info medium-12 columns">
+            @if (UserHelper.IsShortBioNull(Model) && UserHelper.IsAllSocialLinksNull(Model))
+            {
+                <li style="text-align:center">
+                    <h7 style="color:#818181">profile looks empty.</h7>
+                </li>
+            }
+            else
+            {
+                if (!UserHelper.IsShortBioNull(Model))
+                {
+                    <li class="profile-section short-bio medium-12 columns">
+                        <h5 class="section-title">Summary</h5>
+                        <p class="section-detail">
+                            @Model.ShortBio
+                        </p>
+                    </li>
+                }
+
+                if (!UserHelper.IsAllSocialLinksNull(Model))
+                {
+                    <li class="profile-section social-links medium-12 columns">
+                        <h5 class="section-title">Social Links</h5>
+                        <div class="section-detail column">
+                            @if (!UserHelper.IsWebsiteLinkNull(Model))
+                            {
+                                <div class="link personal-blog-link medium-6 columns">
+                                    <a href="@Model.Website">
+                                        <i class="fa fa-globe"></i>
+                                        Website
+                                    </a>
+                                </div>
+                            }
+                            @if (!UserHelper.IsFacebookLinkNull(Model))
+                            {
+                                <div class="link facebook-link medium-6 columns">
+                                    <a href="@Model.Facebook">
+                                        <i class="fa fa-facebook-official"></i>
+                                        Facebook
+                                    </a>
+                                </div>
+                            }
+                            @if (!UserHelper.IsLinkedInLinkNull(Model))
+                            {
+                                <div class=" link linkedin-link medium-6 columns">
+                                    <a href="@Model.LinkedIn">
+                                        <i class="fa fa-linkedin"></i>
+                                        LinkedIn
+                                    </a>
+                                </div>
+                            }
+                            @if (!UserHelper.IsGooglePlusLinkNull(Model))
+                            {
+                                <div class="link googleplus-link medium-6 columns">
+                                    <a href="@Model.GooglePlus">
+                                        <i class="fa fa-google-plus-circle"></i>
+                                        Google+
+                                    </a>
+                                </div>
+                            }
+                        </div>
+                    </li>
+                }
+                else
+                {
+                    <div class="medium-12 column" style="text-align:center">
+                        <h7 style="color:#818181">profile looks empty.</h7>
+                    </div>
+                }
+            }
+        </ul>
+    </div>
+</div>

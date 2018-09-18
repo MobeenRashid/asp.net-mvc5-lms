@@ -1,0 +1,177 @@
+﻿@using Debugtime.Common.Model.View
+@using Debugtime.Common.Static
+@using DebugTime.Domain.Model
+@using Microsoft.AspNet.Identity
+@model Debugtime.Common.Model.View.DashboardViewModel
+@{
+    ViewBag.Title = "User Dashbaord";
+}
+
+<div class="dashboard-container medium-12 columns">
+    <div class="left medium-8 column">
+        <div class="db-section medium-12 column">
+            <h4 class="section-title medium-12 column">
+                In Progress
+            </h4>
+            <div class="section-content medium-12 column">
+                <div class="cc medium-12 column">
+                    <div class="ct medium-3 column hide-for-small-only">
+                        <img src="~/Content/Images/Vectors/bulb.png" />
+                    </div>
+                    <div class="ci medium-5 column">
+                        <p class="primary badge">@Model.InProgress.ProgrammingLanguege</p>
+                        <h6 class="title">@Model.InProgress.Title</h6>
+                        <div class="primary progress" role="progressbar" tabindex="0" aria-valuenow="25" aria-valuemin="0" aria-valuetext="25 percent" aria-valuemax="100">
+                            <div class="progress-meter" style="width: @Model.InProgress.UserCourseProgresses.ElementAt(0).Progress%">
+                            </div>
+                        </div>
+                        <p class="percent-text">@Model.InProgress.UserCourseProgresses.ElementAt(0).Progress% complete</p>
+                    </div>
+                    <div class="ca medium-4 column">
+                        <a href="@Url.Action("Play","Studio",new{area="",courseId=Model.InProgress.Id,section=Model.InProgress.UserCourseProgresses.ElementAt(0).Level,lesson=Model.InProgress.UserCourseProgresses.ElementAt(0).Lesson})" class="button primary">Resume</a>
+                        <p style="text-align: center;font-size: 0.8em">Level @Model.InProgress.UserCourseProgresses.ElementAt(0).Level</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="db-section recently-played medium-12 column">
+
+            <h4 class="section-title medium-12 column">
+                Recently Played
+            </h4>
+
+            <div class="section-content medium-12 column">
+                @foreach (var item in Model.RecentlyPlayed)
+                {
+                    <a href="@Url.Action("Play", "Studio", new {area = "", courseId = item.Id, section = item.UserCourseProgresses.ElementAt(0).Level, lesson = item.UserCourseProgresses.ElementAt(0).Lesson})" class="cc medium-4 column">
+                        <div class="ci medium-12 column">
+                            <p class="primary badge">@item.ProgrammingLanguege</p>
+                            <h6 class="title">@item.Title</h6>
+                            <div class="primary progress" role="progressbar" tabindex="0" aria-valuenow="25" aria-valuemin="0" aria-valuetext="25 percent" aria-valuemax="100">
+                                <div class="progress-meter" style="width: @item.UserCourseProgresses.ElementAt(0).Progress%">
+                                </div>
+                            </div>
+                            <p class="percent-text">@item.UserCourseProgresses.ElementAt(0).Progress% complete</p>
+                        </div>
+
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="right medium-4 column">
+        <div class="db-section badges medium-12 column">
+            <h4 class="section-title medium-12 column">
+                Badges
+            </h4>
+            <div class="section-content medium-12 column">
+                <div class="bc">
+                    <img src="~/Content/Images/Vectors/badge.png" />
+                </div>
+                <div class="caption">
+                    start earning badges when you complete a course, project, or screencast — browse through our <a>content library</a> to get started!
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bottom medium-12 column">
+        <div class="db-section bookmarks medium-12 column">
+            <h4 class="section-title medium-12 column">
+                Bookmarks
+            </h4>
+            <div class="section-content medium-12 column">
+                @foreach (var course in Model.Bookmarks)
+                {
+                    <div class="small-6 medium-4 large-3 column cc">
+                        <div class="course-badge">
+                            <div class="header">
+                                <button role="button" class="btn-bookmark jsBookmark"
+                                        data-course-id="@course.Id" data-user-id="@User.Identity.GetUserId()">
+                                    @if (course.Bookmarks.Any(b => b.CourseId == course.Id && b.UserId == User.Identity.GetUserId()))
+                                    {
+                                    <i class="fa fa-bookmark" style="color: #da3720"></i>
+                                    }
+                                    else
+                                    {
+                                    <i class="fa fa-bookmark-o"></i>
+                                    }
+                                </button>
+                            </div>
+                            <a href="@Url.Action("Detail", "Courses", new { area = "Library", CourseId=course.Id })" class="middle">
+                                <h4 class="title">@course.Title</h4>
+                                <p class="author">@course.AuthorName</p>
+                                @{
+                                    var sCount = course.CourseReviews.Count();
+                                    sCount = sCount == 0 ? 1 : sCount;
+                                    var stSum = course.CourseReviews.Sum(c => c.Stars);
+                                    var avgStars = (decimal)stSum / sCount;
+                                }
+                                <p class="rating">
+                                    @if (avgStars > 0)
+                                    {
+                                        @Html.Partial("_RatingStars", new StarsModel { Count = sCount, Sum = stSum })
+
+                                        <span style="font-size: 0.9em; color: #000">@avgStars</span>
+                                        <span style="font-size: 0.9em; color: #8d8d8d">(@sCount)</span>
+                                    }
+                                    else
+                                    {
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <span style="font-size: 0.9em; color: #8d8d8d">Leave a review</span>
+                                    }
+
+                                </p>
+                            </a>
+                            <a href="@Url.Action("Detail", "Courses", new { area = "Library", CourseId=course.Id })" class="bottom">
+                                <span class="date-publish" style="color: #8d8d8d;font-size: 0.9em">@course.LastUpdate</span>
+                                @if (course.Accessibility == CourseAccessiblity.Free)
+                                {
+                                    <span class="price">Free</span>
+                                }
+                                else
+                                {
+                                    <span class="price">$@course.Price</span>
+                                }
+                            </a>
+                        </div>
+                    </div>
+
+                                    }
+
+            </div>
+        </div>
+
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript">
+        $(function () {
+            var $btnBookmark = $(".jsBookmark");
+            $btnBookmark.click(function () {
+                var cId = $(this).attr("data-course-id");
+                var uId = $(this).attr("data-user-id");
+                var $b = $(this);
+                $.ajax({
+                    url: "@ResourceStrings.ApiBaseAddress"+"/api/course/" + cId + "/bookmark/" + uId,
+                    type: "POST",
+                    dataType: "text json"
+                }).done(function () {
+                    if ($b.children("i").hasClass("fa-bookmark")) {
+                        $b.children("i").addClass("fa-bookmark-o").removeClass("fa-bookmark");
+                    } else if ($b.children("i").hasClass("fa-bookmark-o")) {
+                        $b.children("i").addClass("fa-bookmark").removeClass("fa-bookmark-o");
+                    }
+                }).fail(function () {
+                    if ($b.children("i").hasClass("fa-bookmark")) {
+                        $b.children("i").addClass("fa-bookmark-o").removeClass("fa-bookmark");
+                    } else if ($b.children("i").hasClass("fa-bookmark-o")) {
+                        $b.children("i").addClass("fa-bookmark").removeClass("fa-bookmark-o");
+                    }
+                });
+            });
+        });
+    </script>
+}

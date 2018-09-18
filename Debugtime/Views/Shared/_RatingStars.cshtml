@@ -1,0 +1,28 @@
+﻿@model Debugtime.Common.Model.View.StarsModel
+@{
+   
+    var count = Model.Count == 0 ? 1 : Model.Count;
+    var avgStars = (decimal)Model.Sum / (count*5);
+    avgStars = avgStars * 5;
+    var avgStarsF = (int)avgStars;
+    var sDiff = avgStars - avgStarsF;
+    int totalStars = 5;
+}
+@if (avgStarsF > 0)
+{
+    for (int i = 0; i < avgStarsF; i++)
+    {
+        --totalStars;
+        <i class="fa fa-star"></i>
+    }
+
+    if (sDiff > 0)
+    {
+        --totalStars;
+        <i class="fa fa-star-half-o"></i>
+    }
+    for (int i = 0; i < totalStars; i++)
+    {
+        <i class="fa fa-star-o"></i>
+    }
+}

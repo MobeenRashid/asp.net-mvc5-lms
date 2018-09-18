@@ -1,0 +1,53 @@
+﻿@model Debugtime.Common.Model.View.CartPurchaseViewModel
+@{
+    ViewBag.Title = "Confirm Purchase";
+}
+<div class="dtm-view-container  column medium-12">
+    <div class="signing-form-view-container purchase-view column small-12 large-6 large-push-3 medium-10 medium-push-1">
+    
+        <div class="form-header column medium-12">
+            Confirm Purchase 
+        </div>
+        <div class="form-description column medium-12">
+            <p class="column medium-8 medium-push-2 text-center">
+                In Order to access premium content you need to pay for it.
+            </p>
+        </div>
+        <div class="dtm-form-container column medium-12">
+            @using (Html.BeginForm("PaymentWithPaypal", "Purchase", FormMethod.Post, new { @class = "column medium-10 medium-push-1 dtm-form" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "Attention Required!", new { @class = "dtm-form-group column medium-12" })
+                @Html.HiddenFor(model=>model.Id)
+                <table class="table confirm-purchase">
+                    <tr>
+                        <td class="left">
+                            @Model.Title
+                        </td>
+                        <td class="right">
+                            $@Model.Price
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="left">
+                            Discount
+                        </td>
+                        <td class="right">
+                            $@Model.Discount
+                        </td>
+                    </tr>
+                </table>
+                <div class="callout warning">
+                    <p>By proceeding you agree to <a>view terms and conditions</a>      
+                    </p>
+                </div>
+                <div class="dtm-form-group dtm-form-action medium-12 column">
+                    <button type="submit" class="large button primary float-center form-signing-button">
+                        <i class="fa fa-paypal"></i>
+                        You Pay $@Model.TotalToPay
+                    </button>
+                </div>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,367 @@
+﻿@{
+    ViewBag.Title = "Course Name";
+}
+@Styles.Render("~/Content/Styles/MediaPlayer")
+<div class="dtm-course-container medium-12 columns">
+    <div class="dtm-right-container">
+        <div class="course-tag-cotainer">
+            <a class="dtm-tag">
+                <i class="tag-icon fa fa-tag"></i>
+                Html & CSS
+            </a>
+            <a class="dtm-tag">Node</a>
+            <a class="dtm-tag">Course</a>
+        </div>
+        <div class="dtm-heading-container">
+            <h1 class="course-title">
+                Responsive Web Development
+                <i class="fa fa-lock course-access"></i>
+            </h1>
+            <p class="rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-half-o"></i>
+                <i class="fa fa-star-o"></i>
+                <span class="reviews">100 reviews</span>
+                <a class="add-review">Add Review</a>
+            </p>
+        </div>
+        <div class="course-start medium-12 columns">
+            <a class="button float-right medium-4 large-3 small-6">
+                <i class="fa fa-lock course-access"></i>
+                Enroll Now
+            </a>
+        </div>
+        <div class="preview-container medium-12 columns">
+            <div class="preview-Video medium-12 columns">
+                <div id="player-container" class="dtm-player-container">
+                    <div>
+                        <button id="btnStart" class="dtm-start-button">
+                            <i class="fa fa-play-circle"></i>
+                        </button>
+                        <p class="dtm-video-duration display-non"></p>
+                    </div>
+                    <div id="mediaContainer" class="dtm-media-container">
+                        <video id="video" class="dtm-video-element" preload="auto" poster="~/Code.png">
+                            <source src="/test.MP4" type="video/mp4" />
+                        </video>
+                    </div>
+                    <div class="dtm-bottom-controls display-non">
+                        <div class="dtm-left-controls">
+                            <button id="playPause" class="btn-play-pause btn-chrome-action">
+                                <i class="fa fa-play"></i>
+                            </button>
+                            <p id="currentTime" class="dtm-current-time">
+                                0:00
+                            </p>
+                        </div>
+                        <div class="dtm-middle-controls">
+                            <div id="dtmRail" class="progress-rail">
+                                <div id="dtmScrubber" class="scrubber" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+
+                                </div>
+
+                                <div id="dtmProgress" class="load-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="dtm-right-controls">
+                            <button class="btn-chrome-action btn-video-expand">
+                                <i class="fa fa-expand"></i>
+                            </button>
+                            <div class="dtm-volume-container">
+                                <div class="volume-rail-container">
+                                    <div id="volumeRail" class="dtm-volume-rail">
+                                        <div id="volumeScrubber" class="dtm-volume-scrubber"></div>
+                                    </div>
+                                </div>
+                                <button id="volume" class="btn-volume-action">
+                                    <i class="fa fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="dtm-total-time">
+                                <span id="totalTime" style="margin: 3px">0:00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="course-description medium-12 columns">
+                <section>
+                    <h3>What you will Learn</h3>
+                    <p class="summary">
+                        Front end development has come a long way in recent years. Websites used to be simple, have a small handful of pages, a few jQuery plugins and perhaps some server side functionality for handling form submissions.
+
+                        Now, building a modern front-end website involves boilerplates, generators, package managers, task runners, pre-processors and post-processors. And the complexity in web development continues to grow with many moving parts. It’s confusing and overwhelming to those just starting or transitioning from older techniques.
+
+                        In our course Responsive Web Development, we’ll give you the blueprint for building modern responsive websites. Guilherme Müller walks you through the process of building a front end workflow using powerful tools and concepts. Not only does this course cover the theory of modern responsive web development, you’ll learn how to apply each of these fundamental concepts in practice. By building a single-page portfolio website, step by step we’ll demonstrate each concepts by action.
+                    </p>
+                </section>
+                <section>
+                    <h3>What we'll cover</h3>
+                    <ul class="agenda-items">
+                        <li>
+                            How to work with the command line
+                        </li>
+                        <li>
+                            Node.js and its npm package manager
+                        </li>
+                        <li>
+                            Sass for pre-processing your styles and building your responsive grid system
+                        </li>
+                        <li>
+                            Autoprefixer for automatically adding vendor prefixes
+                        </li>
+                        <li>
+                            BrowserSync for automatically reloading the browser and for remote device testing
+                        </li>
+                    </ul>
+                </section>
+            </div>
+            <div class="course-outline medium-12 columns">
+                <header class="course-curriculum">
+                    <h3>Course Curriculum</h3>
+                    <h5>
+                        <span>9 Sections</span> |
+                        <span>44 Videos</span> |
+                        <span>5 Hours</span>
+                    </h5>
+                </header>
+                <div class="video-contents">
+                    <div class="section-header">
+                        <h5>Section 1: Introduction</h5>
+                    </div>
+                    <div class="section-lesson">
+                        <a class="btn-rounded free">Free</a>
+                        <h6 class="title">Intrduction</h6>
+                        <span class="lenght">5:00</span>
+                        <a class="action">
+                            <i class="fa fa-play-circle"></i>
+                        </a>
+                    </div>
+                    <div class="section-header">
+                        <h5>Section 1: Introduction</h5>
+                    </div>
+                    <div class="section-lesson">
+                        <a class="btn-rounded free">Free</a>
+                        <h6 class="title">Intrduction</h6>
+                        <span class="lenght">5:00</span>
+                        <a class="action">
+                            <i class="fa fa-play-circle"></i>
+                        </a>
+                    </div>
+                    <div class="section-lesson">
+                        <a class="btn-rounded free">Free</a>
+                        <h6 class="title">Intrduction</h6>
+                        <span class="lenght">5:00</span>
+                        <a class="action">
+                            <i class="fa fa-play-circle"></i>
+                        </a>
+                    </div>
+                    <div class="section-lesson">
+                        <a class="btn-rounded free">Free</a>
+                        <h6 class="title">Intrduction</h6>
+                        <span class="lenght">5:00</span>
+                        <a class="action">
+                            <i class="fa fa-play-circle"></i>
+                        </a>
+                    </div>
+                    <div class="section-header">
+                        <h5>Section 1: Introduction</h5>
+                    </div>
+                    <div class="section-lesson">
+                        <a class="btn-rounded premium disabled">Premium</a>
+                        <h6 class="title">Intrduction</h6>
+                        <span class="lenght">5:00</span>
+                        <a class="action disabled">
+                            <i class="fa fa-play-circle"></i>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+            <div class="course-review-container medium-12 columns">
+                <section class="medium-12 columns">
+                    <div class="submit-review medium-12 columns">
+                        <h3>Submit a Review</h3>
+                        <p class="rating">
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                            <span class="tip">Press star to rate</span>
+                        </p>
+                        <textarea class="review-text" placeholder="your review" rows="5"></textarea>
+                        <button type="submit" class="button float-right">Submit</button>
+                    </div>
+
+                </section>
+                <section class="medium-12 columns">
+                    <div class="review-stats medium-12 columns">
+                        <h3>Reviews</h3>
+                        <div class="medium-12 columns">
+                            <div class="medium-6 columns star-breakdowns">
+                                <div class="medium-12 columns breakdown">
+                                    <p class="label-star">5 stars</p>
+                                    <div class="primary progress" role="progressbar" tabindex="0" aria-valuenow="25" aria-valuemin="0" aria-valuetext="25 percent" aria-valuemax="100">
+                                        <div class="progress-meter" style="width: 25%">
+                                        </div>
+                                    </div>
+                                    <p class="person-count">
+                                        22
+                                    </p>
+                                </div>
+                                <div class="medium-12 columns breakdown">
+                                    <p class="label-star">4 stars</p>
+                                    <div class="primary progress" role="progressbar" tabindex="0" aria-valuenow="25" aria-valuemin="0" aria-valuetext="25 percent" aria-valuemax="100">
+                                        <div class="progress-meter" style="width: 20%">
+                                        </div>
+                                    </div>
+                                    <p class="person-count">
+                                        12
+                                    </p>
+                                </div>
+                                <div class="medium-12 columns breakdown">
+                                    <p class="label-star">5 stars</p>
+                                    <div class="primary progress" role="progressbar" tabindex="0" aria-valuenow="25" aria-valuemin="0" aria-valuetext="25 percent" aria-valuemax="100">
+                                        <div class="progress-meter" style="width: 25%">
+                                        </div>
+                                    </div>
+                                    <p class="person-count">
+                                        22
+                                    </p>
+                                </div>
+                                <div class="medium-12 columns breakdown">
+                                    <p class="label-star">5 stars</p>
+                                    <div class="primary progress" role="progressbar" tabindex="0" aria-valuenow="25" aria-valuemin="0" aria-valuetext="25 percent" aria-valuemax="100">
+                                        <div class="progress-meter" style="width: 25%">
+                                        </div>
+                                    </div>
+                                    <p class="person-count">
+                                        22
+                                    </p>
+                                </div>
+                                <div class="medium-12 columns breakdown">
+                                    <p class="label-star">5 stars</p>
+                                    <div class="primary progress" role="progressbar" tabindex="0" aria-valuenow="25" aria-valuemin="0" aria-valuetext="25 percent" aria-valuemax="100">
+                                        <div class="progress-meter" style="width: 25%">
+                                        </div>
+                                    </div>
+                                    <p class="person-count">
+                                        22
+                                    </p>
+                                </div>
+
+                            </div>
+                            <div class="medium-6 columns average-rating">
+                                <h2>4.5</h2>
+                                <p class="rating-stars">
+                                    <i class="fa fa-star fa-2x"></i>
+                                    <i class="fa fa-star fa-2x"></i>
+                                    <i class="fa fa-star fa-2x"></i>
+                                    <i class="fa fa-star fa-2x"></i>
+                                    <i class="fa fa-star-half-o fa-2x"></i>
+                                </p>
+                                <p>38 ratings</p>
+                            </div>
+                        </div>
+                        <div class="user-reviews medium-12 columns">
+                            <div class="review-segment medium-12 columns">
+                                <div class="header medium-12 columns">
+                                    <img src="~/content/Images/user-avatar.jpg" />
+                                    <h5>Mobeen Rashid</h5>
+                                    <p class="rating">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </p>
+                                </div>
+                                <span class="message medium-12 columns">You're a WINNER! No, I mean me... I'M a winner! And that's thanks to yet another wonderful Web Development learning experience, proudly brought to you by The Sitepoint Studio!! Informative, accessible and fun to do! Each step I take, further into the realm of WebDev & Design</span>
+                            </div>
+                            <div class="review-segment medium-12 columns">
+                                <div class="header medium-12 columns">
+                                    <img src="~/content/Images/user-avatar.jpg" />
+                                    <h5>Mobeen Rashid</h5>
+                                    <p class="rating">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </p>
+                                </div>
+                                <span class="message medium-12 columns">You're a WINNER! No, I mean me... I'M a winner! And that's thanks to yet another wonderful Web Development learning experience, proudly brought to you by The Sitepoint Studio!! Informative, accessible and fun to do! Each step I take, further into the realm of WebDev & Design</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+            </div>
+        </div>
+
+    </div>
+    <div class="dtm-left-container">
+        <div class="author-info">
+            <h5>Author Info</h5>
+            <img class="author-avatar" src="~/Content/Images/user-avatar.jpg" />
+            <a class="author-name">Mobeen Rashid</a>
+            <p class="author-description">
+                Mobeen is a passionate software engineer specialization in web application development with ASP.NET, ASP.Net Core
+                MVC, Web  API,  Entity  Framework, Html5 and  CSS.
+            </p>
+        </div>
+        <hr class="section-divider" />
+        <div class="course-info">
+            <h5>Course Info</h5>
+            <table class="course-info">
+                <tr>
+                    <td class="left">Level</td>
+                    <td class="right">Begginer</td>
+                </tr>
+                <tr>
+                    <td class="left">Rating</td>
+                    <td class="right stars">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="left">Duration</td>
+                    <td class="right">1h 55m</td>
+                </tr>
+                <tr>
+                    <td class="left">Released</td>
+                    <td class="right">8 sep 2017</td>
+                </tr>
+            </table>
+        </div>
+        <hr class="section-divider" />
+        <div class="share-course medium-12 columns">
+            <h5>Share Course</h5>
+            <div class="medium-3 columns">
+                <a href="#"><i class="fa fa-facebook-official fa-2x" aria-hidden="true"></i></a>
+            </div>
+            <div class="medium-3 columns">
+                <a href="#"><i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i></a>
+            </div>
+            <div class="medium-3 columns">
+                <a href="#"><i class="fa fa-google-plus-square fa-2x" aria-hidden="true"></i></a>
+            </div>
+            <div class="medium-3 columns">
+                <a href="#"><i class="fa fa-linkedin-square fa-2x" aria-hidden="true"></i></a>
+            </div>
+        </div>
+    </div>
+
+</div>
+

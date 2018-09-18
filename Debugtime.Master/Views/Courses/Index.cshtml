@@ -1,0 +1,97 @@
+﻿@model  IEnumerable<Debugtime.Master.Models.Input.CoursesInputModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+
+<link href="~/Content/Styles/manage-courses.css" rel="stylesheet" />
+
+<div class="app-heading app-heading-bordered app-heading-page">
+    <div class="icon icon-lg">
+        <span class="icon-user-plus"></span>
+    </div>
+    <div class="title">
+        <h2>Courses</h2>
+        <p>Manager Your Courses</p>
+    </div>
+    <!--<div class="heading-elements">
+        <a href="~/Courses/Edit" class="btn btn-danger" id="page-like"><span class="app-spinner loading"></span> loading...</a>
+    </div>-->
+</div>
+<div class="app-heading-container app-heading-bordered bottom">
+    <ul class="breadcrumb">
+        <li><a href="~/Panel/Index">Dashboard</a></li>
+        <li><a href="~/Courses/Index">Courses</a></li>
+        <li class="active">All Courses</li>
+    </ul>
+</div>
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-md-1"></div>
+
+        <div class="col-md-5">
+            @foreach (var item in Model)
+            {
+                <div class="card">
+                    <div class="card-header bg-white">
+                        <div class="media">
+                            <div class="media-left media-middle">
+                                <a href="~/Courses/Edit">
+                                    <img src="~/Content/img/courses/vuejs.png" alt="Card image cap" width="100" class="img-rounded">
+                                </a>
+                            </div>
+                            <div class="media-body media-middle">
+                                <h4 class="card-title"><a href="~/Courses/Edit">@item.Title</a></h4>
+                                <span class="label label-primary">$@item.Price</span> <span class="label label-default">0 SALES</span>
+                            </div>
+                            <div class="media-right media-middle">
+                                <a href="@Url.Action("Edit","Courses", new { id=item.Id})">
+                                    <input type="button" class="btn btn-danger btn-sm" value="Edit" />
+                                </a>
+                            </div>
+                            <div class="media-right media-middle">
+                                <a href="@Url.Action("AllLessons","Courses", new { id=item.Id })">
+                                    <input type="button" class="btn btn-danger btn-sm" value="Lessons" />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="col-md-1"></div>
+
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <br />
+            <br />
+            <ul class="pagination">
+                <li class="disabled">
+                    <a href="~/Courses/Edit" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="active"><a href="~/Courses/Edit">1</a></li>
+                <li><a href="~/Courses/Edit">2</a></li>
+                <li><a href="~/Courses/Edit">3</a></li>
+                <li><a href="~/Courses/Edit">4</a></li>
+                <li><a href="~/Courses/Edit">5</a></li>
+                <li>
+                    <a href="~/Courses/Edit" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<style>
+    a {
+        text-decoration: none !important;
+    }
+</style>

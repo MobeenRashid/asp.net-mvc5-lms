@@ -1,0 +1,129 @@
+﻿@using DebugTime.Domain.Model
+@using Microsoft.AspNet.Identity
+@using Debugtime.Common.Model.View
+@using Debugtime.Common.Static
+@using System.Linq
+@model Debugtime.Common.Model.View.CourseListViewModel
+@{
+    ViewBag.Title = "Courses";
+}
+<div class="all-courses medium-12 columns">
+
+    <header class="header-container all medium-12 columns" style="background: rgba(241, 162, 38, 0.65) url('../../../../Content/Images/courses-cover.jpg');">
+        <div class="heading medium-12 column">
+            <h3 style="margin: 0;">Courses</h3>
+            <p>Achieve carear goals by getting certified</p>
+        </div>
+    </header>
+    <div class="courses medium-12 column">
+        <p class="medium-12 column" style="text-align: center; margin: 0 0 30px 0;"><b>@Model.StickerViewModel.Count</b> Courses about @Model.StickerViewModel.Count <b>Certifications</b></p>
+        <div class="courses-container medium-12 column">
+            @foreach (var course in Model.StickerViewModel)
+            {
+                <div class="small-6 medium-4 large-3 column cc">
+                    <div class="course-badge">
+                        <div class="header">
+                            <img src="@Url.Action("GetThumbnail","Courses",new{area="Library",courseId=course.Id})" />
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <button role="button" class="btn-bookmark jsBookmark"
+                                        data-course-id="@course.Id" data-user-id="@User.Identity.GetUserId()">
+                                    @if (course.Bookmarks.Any(b => b.CourseId == course.Id && b.UserId == User.Identity.GetUserId()))
+                                    {
+                                        <i class="fa fa-bookmark" style="color:#da3720"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="fa fa-bookmark-o"></i>
+                                    }
+                                </button>
+                            }
+                        </div>
+
+                        <a href="@Url.Action("Detail", "Courses", new { area = "Library", CourseId=course.Id })" class="middle">
+                            <h4 class="title">@course.Title</h4>
+                            <p class="author">@course.AuthorName</p>
+                            @{
+                                var sCount = course.CourseReviews.Count();
+                                sCount = sCount == 0 ? 1 : sCount;
+                                var stSum = course.CourseReviews.Sum(c => c.Stars);
+                                var avgStars = (decimal)stSum / sCount;
+                            }
+                            <p class="rating">
+                                @if (avgStars > 0)
+                                {
+                                    @Html.Partial("_RatingStars", new StarsModel { Count = sCount, Sum = stSum })
+
+                                    <span style="font-size: 0.9em; color: #000">@avgStars</span>
+                                    <span style="font-size: 0.9em; color: #8d8d8d">(@sCount)</span>
+                                }
+                                else
+                                {
+                                    <i class="fa fa-star-o"></i>
+                                    <i class="fa fa-star-o"></i>
+                                    <i class="fa fa-star-o"></i>
+                                    <i class="fa fa-star-o"></i>
+                                    <span style="font-size: 0.9em; color: #8d8d8d">Leave a review</span>
+                                }
+
+
+                            </p>
+                        </a>
+                        <a href="@Url.Action("Detail", "Courses", new { area = "Library", CourseId=course.Id })" class="bottom">
+                            <span class="date-publish" style="color: #8d8d8d; font-size: 0.9em">
+                                @course.LastUpdate
+                            </span>
+
+                            @if (course.Accessibility == CourseAccessiblity.Free)
+                            {
+                                <span class="price">Free</span>
+                            }
+                            else
+                            {
+                                <span class="price">$@course.Price</span>
+                            }
+                        </a>
+                    </div>
+                </div>
+
+                                }
+        </div>
+
+        <div class="medium-12 column">
+            <a href="@Url.Action("Index", "Courses", new { area = "Library", take = Model.Take })" class="load-more expanded button @(Model.HaveMore?"":"disabled")">
+                <i class="fa fa-chevron-circle-down"></i>
+                View More
+            </a>
+        </div>
+    </div>
+
+</div>
+@section scripts{
+    <script type="text/javascript">
+        $(function () {
+            var $btnBookmark = $(".jsBookmark");
+            $btnBookmark.click(function () {
+                var cId = $(this).attr("data-course-id");
+                var uId = $(this).attr("data-user-id");
+                var $b = $(this);
+                $.ajax({
+                    url: "https://localhost:44365/api/course/" + cId + "/bookmark/" + uId,
+                    type: "POST",
+                    dataType: "text json"
+                }).done(function () {
+                    if ($b.children("i").hasClass("fa-bookmark")) {
+                        $b.children("i").addClass("fa-bookmark-o").removeClass("fa-bookmark");
+                    } else if ($b.children("i").hasClass("fa-bookmark-o")) {
+                        $b.children("i").addClass("fa-bookmark").removeClass("fa-bookmark-o");
+                    }
+                }).fail(function () {
+                    if ($b.children("i").hasClass("fa-bookmark")) {
+                        $b.children("i").addClass("fa-bookmark-o").removeClass("fa-bookmark");
+                    } else if ($b.children("i").hasClass("fa-bookmark-o")) {
+                        $b.children("i").addClass("fa-bookmark").removeClass("fa-bookmark-o");
+                    }
+                });
+            });
+        });
+    </script>
+}

@@ -1,0 +1,158 @@
+﻿@model Debugtime.Master.Models.Input.VideoInputModel
+@{
+    ViewBag.Title = "EditLesson";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+<link href="~/Content/dropzone/dropzone.min.css" rel="stylesheet" />
+<link href="~/Content/Styles/dropzone.min.css" rel="stylesheet" />
+<script src="~/Scripts/UploadVideo.js"></script>
+
+
+<!-- START PAGE HEADING -->
+<div class="app-heading app-heading-bordered app-heading-page">
+    <div class="icon icon-lg">
+        <span class="icon-user-plus"></span>
+    </div>
+    <div class="title">
+        <h2>Add/Edit Lesson</h2>
+        <p>Add / Edit Lesson (Must change)</p>
+    </div>
+    <!--<div class="heading-elements">
+        <a href="#" class="btn btn-danger" id="page-like"><span class="app-spinner loading"></span> loading...</a>
+    </div>-->
+</div>
+<div class="app-heading-container app-heading-bordered bottom">
+    <ul class="breadcrumb">
+        <li><a href="#">Dashboard</a></li>
+        <li><a href="#">Courses</a></li>
+        <li class="active">Add/Edit Course</li>
+    </ul>
+</div>
+<!-- END PAGE HEADING -->
+<!-- START PAGE CONTAINER -->
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-10">
+
+            <!-- LENGTH EXAMPLE -->
+            <div class="block">
+
+                <div class="app-heading app-heading-small">
+                    <div class="title">
+                        <h2>Add Lesson</h2>
+                    </div>
+                </div>
+                @using (Html.BeginForm("EditLesson", "Courses",FormMethod.Post, new { @class = "form-horizontal", enctype = "" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "")
+
+                   
+                    @Html.HiddenFor(model => model.FileName, new { id="uploadFileName" })
+                    @*<div class="form-group">
+                            <label class="col-md-3 control-label">Preview</label>
+                            <div class="col-md-2">
+                                <img src="~/Content/img/courses/vuejs.png" alt="Card image cap" width="125" class="img-rounded">
+                            </div>
+                            <div class="col-md-3">
+                                <div class="margin-top-10"></div>
+                                <input type="file" class="file btn-default margin-top-10" title="<span class='icon-download2'></span>Choose a file">
+                            </div>
+                        </div>*@
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Video Title</label>
+                        <div class="col-md-6">
+                            @Html.TextBoxFor(model => model.Title, new { id="title",@class = "form-control", placeholder = "Write an Awesome title" })
+                            @Html.ValidationMessageFor(model => model.Title, null, new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Section Title</label>
+                        <div class="col-md-6">
+                            @Html.TextBoxFor(model => model.SectionTitle, new { id = "sectionTitle", @class = "form-control", placeholder = "Write an Awesome section title" })
+                            @Html.ValidationMessageFor(model => model.SectionTitle, null, new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Course</label>
+                        <div class="col-md-5">
+                            @Html.DropDownListFor(model => model.CourseSectionId, Model.CoursesCatagory, new { id = "sectionId", @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Upload Video</label>
+                        @*<div class="col-md-5">
+                                <textarea name="video" class="form-control" rows="8" style="font-size:12px">&lt;iframe class=&quot;embed-responsive-item&quot; src=&quot;https://player.vimeo.com/video/97243285?title=0&amp;byline=0&amp;portrait=0&quot; frameborder=&quot;0&quot; webkitallowfullscreen mozallowfullscreen allowfullscreen width=&quot;100%&quot;&gt;&lt;/iframe&gt;</textarea>
+                                <small class="help-block text-muted-light"><i class="fa fa-file-video-o"></i> <span class="icon-text">Paste Video</span></small>
+                            </div>*@
+                        <div class="col-md-6">
+                            <div id="my-awesome-dropzone" action="" class="form-group margin-top-20" style="padding-left:15px">
+                                <input class="file btn-primary" accept="video/*" type="file" name="file" title="<span class='icon-download2'></span> Select Video" id="fileItem" onchange="onChange()" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" >
+                        <label class="col-md-4 control-label"></label>
+                        <div class="col-md-7" style="border:solid 1px lightgrey;margin-left:-50px" >
+                            <div class="embed-responsive embed-responsive-16by9" >
+                                @*<video controls class="embed-responsive-item">
+                                        <source src=""  />
+                                    </video>*@
+                                <iframe class="embed-responsive-item"  src="" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" width="100%" height="250"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group margin-top-20">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-5">
+                            <input id="btnUpload" class="btn btn-primary" type="submit" value="Submit"/>
+                        </div>
+                    </div>
+                }
+            </div>
+            <!-- END LENGTH EXAMPLE -->
+
+        </div>
+        <div class="col-md-1">
+        </div>
+    </div>
+
+
+    <div class="row">
+
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <div class="title">
+                <h1>Files</h1>
+            </div>
+            <div class="block">
+                <div class="card-block">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <form id="my-awesome-dropzone" action="/target" class="dropzone"></form>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="tree-toggle nav-header"><i class="fa fa-folder-open fa-lg"></i>  Lesson Files</label>
+                            <ul class="nav nav-list tree">
+                                <li><a href="#"><i class="fa fa-file"></i> lesson-1.zip</a></li>
+                                <li><a href="#"><i class="fa fa-file"></i> lesson-style.zip</a></li>
+                            </ul>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="cols-md-1"></div>
+        </div>
+
+
+    </div>
+</div>
+<script src="~/Content/dropzone/dropzone.min.js"></script>
+

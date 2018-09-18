@@ -1,0 +1,182 @@
+﻿@model Debugtime.Master.Models.Input.QuizQuestionOptionModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+
+<link href="~/Content/Styles/manage-courses.css" rel="stylesheet" />
+
+<div class="app-heading app-heading-bordered app-heading-page">
+    <div class="icon icon-lg">
+        <span class="icon-user-plus"></span>
+    </div>
+    <div class="title">
+        <h2>Quiz Manager</h2>
+        <p>Add New</p>
+    </div>
+
+</div>
+<div class="app-heading-container app-heading-bordered bottom">
+    <ul class="breadcrumb">
+        <li><a href=@Url.Action("Index","Panel")>Dashboard</a></li>
+        <li><a href="@Url.Action("Index")">Quiz Manager</a></li>
+        <li class="active">Add New</li>
+    </ul>
+</div>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-10 col-md-push-1">
+            @if (ViewBag.Success)
+            {
+                <div class="alert alert-success" role="alert">
+                    <b>Success!</b> Information Updated Successfully
+                </div>
+            }
+
+        </div>
+        @using (Html.BeginForm("AddQuiz", "Quiz", FormMethod.Post))
+        {
+            @Html.ValidationSummary(false, "")
+
+            <div class="col-md-10 col-md-push-1">
+                <div class="title">
+                    <h1>Add New Quiz</h1>
+                </div>
+                <div class="block">
+
+                    <h2>Basic</h2>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.QuizTitle, new { @class = "col-md-3 control-label" })
+                        <div class="col-md-5">
+                            @Html.TextBoxFor(model => model.QuizTitle, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.QuizTitle)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Course:</label>
+                        <div class="col-md-5">
+                            @Html.DropDownList("CourseId", (IEnumerable<SelectListItem>)ViewBag.Courses, new { @class = "form-control" })
+
+                            @Html.ValidationMessageFor(model => model.CourseId)
+                        </div>
+                    </div>
+                    <div class="form-group margin-top-20">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-5">
+                            <button class="btn btn-primary" type="submit">Add Quiz</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        }
+        <div class="col-md-10 col-md-push-1">
+            <div class="title">
+                <h1>Add New Questions</h1>
+            </div>
+            <div class="block">
+                @using (Html.BeginForm("AddQuestion", "Quiz", FormMethod.Post))
+                {
+                    <h2>Basic</h2>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.QuestionTitle, new { @class = "col-md-3 control-label" })
+                        <div class="col-md-5">
+                            @Html.TextBoxFor(model => model.QuestionTitle, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.QuestionTitle)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.QuestionAnswer, new { @class = "col-md-3 control-label" })
+                        <div class="col-md-5">
+                            @Html.TextBoxFor(model => model.QuestionAnswer, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.QuestionAnswer)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Quiz:</label>
+                        <div class="col-md-5">
+                            @Html.DropDownList("QuizId", (IEnumerable<SelectListItem>)ViewBag.Quizes, new { @class = "form-control" })
+
+                            @Html.ValidationMessageFor(model => model.QuizId)
+                        </div>
+                    </div>
+                    <div class="form-group margin-top-20">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-5">
+                            <button class="btn btn-primary" type="submit">Add Question</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="col-md-10 col-md-push-1">
+            <div class="title">
+                <h1>Add New Options</h1>
+            </div>
+            <div class="block">
+                @using (Html.BeginForm("AddOption", "Quiz", FormMethod.Post))
+                {
+                    <h2>Basic</h2>
+                    <div class="col-md-6 margin-bottom-20">
+                        <label class="col-md-12 control-label">Quiz:</label>
+                        <div class="col-md-12">
+                            @Html.DropDownList("QuestionQuizId", (IEnumerable<SelectListItem>)ViewBag.Quizes, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.QuizId)
+                        </div>
+
+                    </div>
+                    <div class="col-md-6 margin-bottom-20">
+                        <label class="col-md-12 control-label">Question:</label>
+                        <div class="col-md-12">
+                            @Html.DropDownList("QuestionId", (List<SelectListItem>)ViewBag.Questions, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.QuestionId)
+                        </div>
+                    </div>
+
+                    @Html.Hidden("OptionQuestionTitle")
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.OptionValue, new { @class = "col-md-12 control-label" })
+                        <div class="col-md-12">
+                            @Html.TextAreaFor(model => model.OptionValue, new { @class = "form-control", rows = "5" })
+                            @Html.ValidationMessageFor(model => model.OptionValue)
+                        </div>
+                    </div>
+
+                    <div class="form-group margin-top-10">
+                        <div class="col-md-12">
+                            <button class="btn btn-primary" type="submit">Add Option</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript">
+        $(function () {
+            $('#QuestionQuizId').change(function () {
+                var quizId = $(this).find("option:selected").attr("value");
+                $.getJSON("http://localhost:52982/Quiz/GetQuestions/" + quizId,
+                    function (data) {
+                        $("#QuestionId").children("option").remove();
+                        $.each(data, function (key, item) {
+                            $("#QuestionId").append($("<option></option>").attr("value", item.QuizId)
+                                .text(item.Title));
+                        });
+                    });
+            });
+
+            $("#QuestionId").change(function () {
+                var questionTitle = $(this).find("option:selected").text();
+                console.log(questionTitle);
+                
+                $("#OptionQuestionTitle").attr('value', questionTitle);
+            });
+        });
+    </script>
+}

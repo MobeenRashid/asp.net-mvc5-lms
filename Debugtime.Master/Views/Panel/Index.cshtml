@@ -1,0 +1,210 @@
+﻿@using Debugtime.Common.Static
+@model Debugtime.Common.Model.View.UsageSummaryModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+}
+
+<div class="app-heading app-heading-bordered app-heading-page">
+    <div class="icon icon-lg">
+        <span class="icon-laptop-phone"></span>
+    </div>
+    <div class="title">
+        <h2>Dashboard</h2>
+        <p>All Statistics of DebugTime</p>
+    </div>
+    <!--<div class="heading-elements">
+        <a href="~/Courses/Edit" class="btn btn-danger" id="page-like"><span class="app-spinner loading"></span> loading...</a>
+    </div>-->
+</div>
+<div class="app-heading-container app-heading-bordered bottom">
+    <ul class="breadcrumb">
+        <li><a href="~/Panel/Index">DebugTime</a></li>
+        <li class="active">Dashboard</li>
+    </ul>
+</div>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-3">
+
+            <ul class="app-feature-gallery app-feature-gallery-noshadow margin-bottom-0">
+                <li>
+                    <!-- START WIDGET -->
+                    <div class="app-widget-tile">
+                        <div class="col-sm-4">
+                            <div class="icon icon-lg">
+                                <span class="icon-"></span>
+                            </div>
+                        </div>
+                        <div class="line">
+                            <div class="intval">Total Users</div>
+                        </div>
+                        <div class="intval">@Model.TotalUsers</div>
+                    </div>
+                    <!-- END WIDGET -->
+                </li>
+            </ul>
+
+        </div>
+        <div class="col-md-3">
+
+            <ul class="app-feature-gallery app-feature-gallery-noshadow margin-bottom-0">
+                <li>
+                    <!-- START WIDGET -->
+                    <div class="app-widget-tile app-widget-highlight">
+                        <div class="col-sm-4">
+                            <div class="icon icon-lg">
+                                <span class="icon-"></span>
+                            </div>
+                        </div>
+                        <div class="line">
+                            <div class="intval">Total Courses</div>
+                        </div>
+                        <div class="intval">@Model.TotalCourses</div>
+                    </div>
+                    <!-- END WIDGET -->
+                </li>
+            </ul>
+
+        </div>
+        <div class="col-md-3">
+
+            <ul class="app-feature-gallery app-feature-gallery-noshadow margin-bottom-0">
+                <li>
+                    <!-- START WIDGET -->
+                    <div class="app-widget-tile app-widget-highlight">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="icon icon-lg">
+                                    <span class="icon-"></span>
+                                </div>
+                            </div>
+                            <div class="line">
+                                <div class="intval">Sold Courses</div>
+                            </div>
+                            <div class="intval">@Model.BuyCourses</div>
+                        </div>
+                    </div>
+                    <!-- END WIDGET -->
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-3">
+
+            <ul class="app-feature-gallery app-feature-gallery-noshadow margin-bottom-0">
+                <li>
+                    <!-- START WIDGET -->
+                    <div class="app-widget-tile app-widget-highlight">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="icon"><i class="fa fa-user-o fa-3x pull-right"></i></div>
+                            </div>
+                            <div class="line">
+                                <div class="intval">Used Media Size</div>
+                            </div>
+                            <div class="intval">@Model.UsedMediaSize MB</div>
+                        </div>
+                    </div>
+                    <!-- END WIDGET -->
+                </li>
+            </ul>
+
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-9">
+
+            <div id="chartContainer"></div>
+            <script type="text/javascript">
+                window.onload = function () {
+                    var chart = new CanvasJS.Chart("chartContainer", {
+                        title: {
+                            text: ""
+                        },
+                        animationEnabled: true,
+                        legend: {
+                            verticalAlign: "center",
+                            horizontalAlign: "left",
+                            fontSize: 20,
+                            fontFamily: "Helvetica"
+                        },
+                        theme: "theme2",
+                        data: [
+                        {
+                            type: "pie",
+                            indexLabelFontFamily: "Garamond",
+                            indexLabelFontSize: 20,
+                            indexLabel: "{label} {y}",
+                            startAngle: -20,
+                            showInLegend: true,
+                            toolTipContent: "{legendText} {y}",
+                            dataPoints: [
+                                { y:@Model.TotalUsers,legendText: "Total Users", label: "Total Users" },
+                                { y:@Model.TotalCourses, legendText: "Total Courses", label: "Total Courses" },
+                                { y:@Model.BuyCourses, legendText: "Sold Courses", label: "Sold Courses" }
+                            ]
+                        }
+                        ]
+                    });
+                    chart.render();
+                };
+            </script>
+
+            </div>
+        <div class="col-md-3">
+            <div class="block block-condensed">
+                <div class="app-heading">
+                    <div class="title">
+                        <h2>Our Authors</h2>
+                    </div>
+                    <div class="heading-elements">
+                        <button class="btn btn-default btn-icon-fixed"><span class="icon-profile"></span>Courses Viewed</button>
+                    </div>
+                </div>
+      
+                <div class="block-content">
+
+                    <div class="form-group">
+                        @foreach (var item in Model.AuthorNames)
+                        {
+                            <label> @item</label>
+                            <div class="progress progress-sm" data-toggle="tooltip" data-placement="top" title="" data-original-title="75%">
+                                <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+                            </div>
+                        }
+                        
+                    </div>
+                    <div class="form-group">
+                        <label> Mubashar Rafique</label>
+                        <div class="progress progress-sm" data-toggle="tooltip" data-placement="top" title="" data-original-title="70%">
+                            <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label> Mobeen Rashid</label>
+                        <div class="progress progress-sm" data-toggle="tooltip" data-placement="top" title="" data-original-title="42%">
+                            <div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow="42" aria-valuemin="0" aria-valuemax="100" style="width: 42%"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label> Hamza Zulifqar</label>
+                        <div class="progress progress-sm" data-toggle="tooltip" data-placement="top" title="" data-original-title="42%">
+                            <div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow="42" aria-valuemin="0" aria-valuemax="100" style="width: 32%"></div>
+                        </div>
+                    </div>
+                    
+                    </div>
+                   </div>
+                    <!-- END TOP STORES -->
+
+                </div>
+            </div>
+
+        </div>
+
+

@@ -1,0 +1,186 @@
+﻿@using Debugtime.Common.Static
+@model IList<Debugtime.Common.Model.View.UserListViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+
+<!-- START PAGE HEADING -->
+<div class="app-heading app-heading-bordered app-heading-page">
+    <div class="icon icon-lg">
+        <span class="icon-users"></span>
+    </div>
+    <div class="title">
+        <h2>All Users</h2>
+        <p>Delete or Update Any User</p>
+    </div>
+
+</div>
+<div class="app-heading-container app-heading-bordered bottom">
+    <ul class="breadcrumb">
+        <li><a href="#">Dashboard</a></li>
+        <li><a href="#">Users</a></li>
+        <li class="active">All Users</li>
+    </ul>
+</div>
+<!-- END PAGE HEADING -->
+
+<div class="container">
+
+
+    <div class="block block-condensed">
+
+
+        <table class="table table-head-light table-striped">
+            <thead>
+                <tr>
+                    <th>user</th>
+                    <th>about</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model)
+            {
+                    <tr class="@user.Id">
+                        <td>
+                            <div class="contact contact-rounded contact-bordered contact-lg status-online">
+                                <img src=@Url.Action("GetAvatar", "Users", new { userId = user.Id })>
+                                <div class="contact-container">
+                                    <a href="https://localhost:44361/member/@user.UserName">
+                                        @user.FullName
+                                    </a>
+                                    <span>@user.JobTitle</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <p>
+                                <strong>@user.Company</strong><br>
+                                @user.ShortBio
+                            </p>
+                        </td>
+                        @*<td>
+                                <select class="bs-select" name="user_1">
+                                    <option selected="">Administrator</option>
+                                    <option>Author</option>
+                                    <option>Student</option>
+                                </select>
+                            </td>*@
+                        <td>
+                            <a href="@Url.Action("Edit","Users",new{ id=user.Id})" class="btn btn-default btn-icon">
+                                <span class="fa fa-pencil"></span>
+                            </a>
+
+                            <button data-id="@user.Id" class="btn btn-default btn-icon js-del">
+                                <span class="fa fa-times"></span>
+                            </button>
+                        </td>
+                    </tr>
+
+                }
+                @*<tr>
+                        <td>
+                            <div class="contact contact-rounded contact-bordered contact-lg status-online">
+                                <img src="~/Content/Assets/images/users/user_2.jpg">
+                                <div class="contact-container">
+                                    <a href="#">John Doe</a>
+                                    <span>Web Developer</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <p>
+                                <strong>Lorem ipsum dolor sit</strong><br> Aliquam in vestibulum nibh. Phasellus iaculis tristique nulla. Cras eu nisi felis.
+                            </p>
+                        </td>
+                        <td>
+                            <select class="bs-select" name="user_2">
+                                <option>Administrator</option>
+                                <option>Author</option>
+                                <option selected="">Student</option>
+                            </select>
+                        </td>
+                        <td>
+                            <button class="btn btn-default btn-icon"><span class="fa fa-pencil"></span></button>
+                            <button class="btn btn-default btn-icon"><span class="fa fa-times"></span></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="contact contact-rounded contact-bordered contact-lg status-away">
+                                <img src="~/Content/Assets/images/users/user_4.jpg">
+                                <div class="contact-container">
+                                    <a href="#">Stephany Owkins</a>
+                                    <span>Designer</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <p>
+                                <strong>Lorem ipsum dolor sit</strong><br> Aliquam in vestibulum nibh. Phasellus iaculis tristique nulla. Cras eu nisi felis.
+                            </p>
+                        </td>
+                        <td>
+                            <select class="bs-select" name="user_3">
+                                <option>Administrator</option>
+                                <option selected="">Author</option>
+                                <option>Student</option>
+                            </select>
+                        </td>
+                        <td>
+                            <button class="btn btn-default btn-icon"><span class="fa fa-pencil"></span></button>
+                            <button class="btn btn-default btn-icon"><span class="fa fa-times"></span></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="contact contact-rounded contact-bordered contact-lg status-offline">
+                                <img src="~/Content/Assets/images/users/user_5.jpg">
+                                <div class="contact-container">
+                                    <a href="#">Garret Tofty</a>
+                                    <span>CEO</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <p>
+                                <strong>Lorem ipsum dolor sit</strong><br> Aliquam in vestibulum nibh. Phasellus iaculis tristique nulla. Cras eu nisi felis.
+                            </p>
+                        </td>
+                        <td>
+                            <select class="bs-select" name="user_4">
+                                <option>Administrator</option>
+                                <option>Author</option>
+                                <option selected="">Student</option>
+                            </select>
+                        </td>
+                        <td>
+                            <button class="btn btn-default btn-icon"><span class="fa fa-pencil"></span></button>
+                            <button class="btn btn-default btn-icon"><span class="fa fa-times"></span></button>
+                        </td>
+                    </tr>*@
+            </tbody>
+        </table>
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript">
+        $(function () {
+            $(".js-del").click(function () {
+                if (confirm("Are you sure you want to delete user?")) {
+                    var userId = $(this).attr("data-id");
+                    $.ajax({
+                        url:@ResourceStrings.ApiBaseAddress+"/api/users/" + userId + "/delete",
+                        type: 'GET'
+                    }).done(function () {
+                        $(".js-del").parents('.' + userId).fadeOut();
+                    }).fail(function () {
+
+                        $(".js-del").parents('.'+userId).fadeOut();
+                    });
+                }
+            });
+        });
+    </script>
+}

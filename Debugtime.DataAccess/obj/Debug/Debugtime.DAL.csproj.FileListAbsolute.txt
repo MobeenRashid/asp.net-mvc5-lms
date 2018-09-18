@@ -1,0 +1,8 @@
+C:\Users\Mubeen Rashid\Source\Repos\debugtime\debugtime\Debugtime.DataAccess\obj\Debug\Debugtime.DAL.csprojResolveAssemblyReference.cache
+C:\Users\Mubeen Rashid\Source\Repos\debugtime\debugtime\Debugtime.DataAccess\obj\Debug\Debugtime.DataAccess.Migrations.InitialCreate.resources
+C:\Users\Mubeen Rashid\Source\Repos\debugtime\debugtime\Debugtime.DataAccess\obj\Debug\Debugtime.DataAccess.Migrations.AddedCertificationTable.resources
+C:\Users\Mubeen Rashid\Source\Repos\debugtime\debugtime\Debugtime.DataAccess\obj\Debug\Debugtime.DataAccess.Migrations.AddedOrderAndProgressTables.resources
+C:\Users\Mubeen Rashid\Source\Repos\debugtime\debugtime\Debugtime.DataAccess\obj\Debug\Debugtime.DataAccess.Migrations.AddedForeignKeyPropertiesToProfileClasses.resources
+C:\Users\Mubeen Rashid\Source\Repos\debugtime\debugtime\Debugtime.DataAccess\obj\Debug\Debugtime.DataAccess.Migrations.AddedCertificationpathCourceVideoTables.resources
+C:\Users\Mubeen Rashid\Source\Repos\debugtime\debugtime\Debugtime.DataAccess\obj\Debug\Debugtime.DataAccess.Migrations.AddedSubscriptionTables.resources
+C:\Users\Mubeen Rashid\Source\Repos\debugtime\debugtime\Debugtime.DataAccess\obj\Debug\Debugtime.DAL.csproj.GenerateResource.Cache

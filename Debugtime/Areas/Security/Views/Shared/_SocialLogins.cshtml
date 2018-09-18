@@ -1,0 +1,37 @@
+﻿<div class="oauth-providers column medium-12">
+    <hr style="width:80%" />
+    <p class="caption">Or SignIn from Following Services</p>
+    @using (Html.BeginForm("SocialLogin", "Account",
+                        new { area = "Security", returnUrl = ViewBag.ReturnUrl }, FormMethod.Post, null))
+    {
+        @Html.AntiForgeryToken();
+        <div class="provider-buttons column medium-10 medium-push-1">
+            <div class="column medium-4">
+                <button type="submit" class="button" style="color:#426FAD;" id="providerName" name="providerName" value="Facebook">
+                    <p>
+                        <i class="fa fa-facebook-official"></i>
+                        <span>Facebook</span>
+                    </p>
+                </button>
+            </div>
+            <div class="column medium-4">
+                <button type="submit" class="button" id="providerName" name="providerName" style="color:#e24115" value="Google">
+                    <p>
+                        <i class="fa fa-google"></i>
+                        <span>Google</span>
+                    </p>
+                </button>
+            </div>
+            <div class="column medium-4">
+                <button type="submit" id="providerName" name="providerName" class="button" style="color:#0074B4" value="LinkedIn">
+                    <p>
+                        <i class="fa fa-linkedin"></i>
+                        <span>LinkedIn</span>
+                    </p>
+                </button>
+            </div>
+        </div>
+    }
+</div>
+
+

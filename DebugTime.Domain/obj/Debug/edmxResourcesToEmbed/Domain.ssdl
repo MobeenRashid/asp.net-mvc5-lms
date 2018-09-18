@@ -1,0 +1,974 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Domain.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ApplicationUserSubscriptions">
+    <Key>
+      <PropertyRef Name="ApplicationUserRefId" />
+      <PropertyRef Name="SubscriptionRefId" />
+    </Key>
+    <Property Name="ApplicationUserRefId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="SubscriptionRefId" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetRoles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaims">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ClaimType" Type="nvarchar(max)" />
+    <Property Name="ClaimValue" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogins">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserRoles">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="DateModified" Type="datetime" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+    <Property Name="PasswordHash" Type="nvarchar(max)" />
+    <Property Name="SecurityStamp" Type="nvarchar(max)" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" />
+    <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="datetime" />
+    <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Catagories">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Slag" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="CertificationPaths">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="CertName" Type="nvarchar(max)" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="DateModified" Type="datetime" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Certifications">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" />
+    <Property Name="Company" Type="nvarchar(max)" />
+    <Property Name="DateIssued" Type="datetime" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="DateModified" Type="datetime" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="ProfileId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CourseProgresses">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="CourseId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserProgressId" Type="nvarchar(max)" />
+    <Property Name="IsCompleted" Type="bit" Nullable="false" />
+    <Property Name="IsInProgress" Type="bit" Nullable="false" />
+    <Property Name="Completion" Type="int" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="DateModified" Type="datetime" />
+    <Property Name="UserProgress_UserProfileId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CourseReviews">
+    <Key>
+      <PropertyRef Name="CourseId" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="CourseId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Stars" Type="int" Nullable="false" />
+    <Property Name="Review" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Courses">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="AgendaItems" Type="nvarchar(max)" />
+    <Property Name="Duration" Type="nvarchar(max)" />
+    <Property Name="Price" Type="float" Nullable="false" />
+    <Property Name="ThumbnailPath" Type="nvarchar(max)" />
+    <Property Name="HasAssessment" Type="bit" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="DateModified" Type="datetime" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="Tags" Type="nvarchar(max)" />
+    <Property Name="Accessibility" Type="int" Nullable="false" />
+    <Property Name="Level" Type="int" Nullable="false" />
+    <Property Name="CatagoryId" Type="nvarchar" MaxLength="128" />
+    <Property Name="QuizId" Type="nvarchar(max)" />
+    <Property Name="AuthorId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CoursesCertificationPathsTable">
+    <Key>
+      <PropertyRef Name="CourseRefId" />
+      <PropertyRef Name="CertificationPathRefId" />
+    </Key>
+    <Property Name="CourseRefId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="CertificationPathRefId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CourseSections">
+    <Key>
+      <PropertyRef Name="CourseId" />
+      <PropertyRef Name="Title" />
+    </Key>
+    <Property Name="CourseId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Order" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CreditCards">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="CardNumber" Type="nvarchar(max)" />
+    <Property Name="AccountId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="DateModified" Type="datetime" />
+  </EntityType>
+  <EntityType Name="DisplayPictures">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="FileName" Type="nvarchar(max)" />
+    <Property Name="ContentType" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Content" Type="varbinary(max)" Nullable="false" />
+    <Property Name="IsCurrent" Type="bit" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="DateModified" Type="datetime" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="ProfileId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Links">
+    <Key>
+      <PropertyRef Name="UserProfileId" />
+    </Key>
+    <Property Name="UserProfileId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Website" Type="nvarchar(max)" />
+    <Property Name="Facebook" Type="nvarchar(max)" />
+    <Property Name="LinkedIn" Type="nvarchar(max)" />
+    <Property Name="GooglePlus" Type="nvarchar(max)" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="DateModified" Type="datetime" />
+  </EntityType>
+  <EntityType Name="OrderDetails">
+    <Key>
+      <PropertyRef Name="OrderId" />
+    </Key>
+    <Property Name="OrderId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="OrderDate" Type="datetime" Nullable="false" />
+    <Property Name="OrderAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="OrderDiscount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Orders">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="SubscriptionId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="DateModified" Type="datetime" />
+  </EntityType>
+  <EntityType Name="QuestionOptions">
+    <Key>
+      <PropertyRef Name="Value" />
+      <PropertyRef Name="QuestionId" />
+    </Key>
+    <Property Name="Value" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="QuestionId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="QuestionTitle" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="QuizApplicationUsers">
+    <Key>
+      <PropertyRef Name="Quiz_QuizId" />
+      <PropertyRef Name="ApplicationUser_Id" />
+    </Key>
+    <Property Name="Quiz_QuizId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ApplicationUser_Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="QuizQuestions">
+    <Key>
+      <PropertyRef Name="Title" />
+      <PropertyRef Name="QuizId" />
+    </Key>
+    <Property Name="Title" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="QuizId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Answer" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Quizs">
+    <Key>
+      <PropertyRef Name="QuizId" />
+    </Key>
+    <Property Name="QuizId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Subscriptions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="DateModified" Type="datetime" />
+  </EntityType>
+  <EntityType Name="UserBookmarks">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="CourseId" />
+    </Key>
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="CourseId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserProfiles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Location" Type="nvarchar(max)" />
+    <Property Name="JobTitle" Type="nvarchar(max)" />
+    <Property Name="ShortBio" Type="nvarchar(max)" />
+    <Property Name="Company" Type="nvarchar(max)" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="DateModified" Type="datetime" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserProgresses">
+    <Key>
+      <PropertyRef Name="UserProfileId" />
+    </Key>
+    <Property Name="UserProfileId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="DateModified" Type="datetime" />
+  </EntityType>
+  <EntityType Name="UserQuizAnswers">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="QuizId" />
+      <PropertyRef Name="QuestionId" />
+    </Key>
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="QuizId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="QuestionId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="IsCorrect" Type="bit" Nullable="false" />
+    <Property Name="ApplicationUser_Id" Type="nvarchar" MaxLength="128" />
+    <Property Name="QuizQuestion_Title" Type="nvarchar" MaxLength="128" />
+    <Property Name="QuizQuestion_QuizId" Type="nvarchar" MaxLength="128" />
+  </EntityType>
+  <EntityType Name="Videos">
+    <Key>
+      <PropertyRef Name="Path" />
+      <PropertyRef Name="CourseSectionId" />
+    </Key>
+    <Property Name="Path" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="CourseSectionId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="CourseTitle" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="DateModified" Type="datetime" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="IsFree" Type="bit" Nullable="false" />
+    <Property Name="Order" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_dbo_ApplicationUserSubscriptions_dbo_AspNetUsers_ApplicationUserRefId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ApplicationUserSubscriptions" Type="Self.ApplicationUserSubscriptions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ApplicationUserSubscriptions">
+        <PropertyRef Name="ApplicationUserRefId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_ApplicationUserSubscriptions_dbo_Subscriptions_SubscriptionRefId">
+    <End Role="Subscriptions" Type="Self.Subscriptions" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ApplicationUserSubscriptions" Type="Self.ApplicationUserSubscriptions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subscriptions">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ApplicationUserSubscriptions">
+        <PropertyRef Name="SubscriptionRefId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+    <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetRoles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Certifications_dbo_UserProfiles_ProfileId">
+    <End Role="UserProfiles" Type="Self.UserProfiles" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Certifications" Type="Self.Certifications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserProfiles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Certifications">
+        <PropertyRef Name="ProfileId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_CourseProgresses_dbo_Courses_CourseId">
+    <End Role="Courses" Type="Self.Courses" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="CourseProgresses" Type="Self.CourseProgresses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Courses">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CourseProgresses">
+        <PropertyRef Name="CourseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_CourseProgresses_dbo_UserProgresses_UserProgress_UserProfileId">
+    <End Role="UserProgresses" Type="Self.UserProgresses" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="CourseProgresses" Type="Self.CourseProgresses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserProgresses">
+        <PropertyRef Name="UserProfileId" />
+      </Principal>
+      <Dependent Role="CourseProgresses">
+        <PropertyRef Name="UserProgress_UserProfileId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_CourseReviews_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="CourseReviews" Type="Self.CourseReviews" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CourseReviews">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_CourseReviews_dbo_Courses_CourseId">
+    <End Role="Courses" Type="Self.Courses" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="CourseReviews" Type="Self.CourseReviews" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Courses">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CourseReviews">
+        <PropertyRef Name="CourseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Courses_dbo_AspNetUsers_AuthorId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="Courses" Type="Self.Courses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Courses">
+        <PropertyRef Name="AuthorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Courses_dbo_Catagories_CatagoryId">
+    <End Role="Catagories" Type="Self.Catagories" Multiplicity="0..1" />
+    <End Role="Courses" Type="Self.Courses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Catagories">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Courses">
+        <PropertyRef Name="CatagoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_CoursesCertificationPathsTable_dbo_CertificationPaths_CourseRefId">
+    <End Role="CertificationPaths" Type="Self.CertificationPaths" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="CoursesCertificationPathsTable" Type="Self.CoursesCertificationPathsTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CertificationPaths">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CoursesCertificationPathsTable">
+        <PropertyRef Name="CourseRefId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_CoursesCertificationPathsTable_dbo_Courses_CertificationPathRefId">
+    <End Role="Courses" Type="Self.Courses" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="CoursesCertificationPathsTable" Type="Self.CoursesCertificationPathsTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Courses">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CoursesCertificationPathsTable">
+        <PropertyRef Name="CertificationPathRefId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_CourseSections_dbo_Courses_CourseId">
+    <End Role="Courses" Type="Self.Courses" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="CourseSections" Type="Self.CourseSections" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Courses">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CourseSections">
+        <PropertyRef Name="CourseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_CreditCards_dbo_AspNetUsers_AccountId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="CreditCards" Type="Self.CreditCards" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CreditCards">
+        <PropertyRef Name="AccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_DisplayPictures_dbo_UserProfiles_ProfileId">
+    <End Role="UserProfiles" Type="Self.UserProfiles" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="DisplayPictures" Type="Self.DisplayPictures" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserProfiles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DisplayPictures">
+        <PropertyRef Name="ProfileId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Links_dbo_UserProfiles_UserProfileId">
+    <End Role="UserProfiles" Type="Self.UserProfiles" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Links" Type="Self.Links" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="UserProfiles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Links">
+        <PropertyRef Name="UserProfileId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_OrderDetails_dbo_Orders_OrderId">
+    <End Role="Orders" Type="Self.Orders" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderDetails">
+        <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Orders_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Orders_dbo_Subscriptions_SubscriptionId">
+    <End Role="Subscriptions" Type="Self.Subscriptions" Multiplicity="1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subscriptions">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="SubscriptionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_QuestionOptions_dbo_QuizQuestions_QuestionTitle_QuestionId">
+    <End Role="QuizQuestions" Type="Self.QuizQuestions" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="QuestionOptions" Type="Self.QuestionOptions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QuizQuestions">
+        <PropertyRef Name="Title" />
+        <PropertyRef Name="QuizId" />
+      </Principal>
+      <Dependent Role="QuestionOptions">
+        <PropertyRef Name="QuestionTitle" />
+        <PropertyRef Name="QuestionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_QuizApplicationUsers_dbo_AspNetUsers_ApplicationUser_Id">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="QuizApplicationUsers" Type="Self.QuizApplicationUsers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="QuizApplicationUsers">
+        <PropertyRef Name="ApplicationUser_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_QuizApplicationUsers_dbo_Quizs_Quiz_QuizId">
+    <End Role="Quizs" Type="Self.Quizs" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="QuizApplicationUsers" Type="Self.QuizApplicationUsers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Quizs">
+        <PropertyRef Name="QuizId" />
+      </Principal>
+      <Dependent Role="QuizApplicationUsers">
+        <PropertyRef Name="Quiz_QuizId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_QuizQuestions_dbo_Quizs_QuizId">
+    <End Role="Quizs" Type="Self.Quizs" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="QuizQuestions" Type="Self.QuizQuestions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Quizs">
+        <PropertyRef Name="QuizId" />
+      </Principal>
+      <Dependent Role="QuizQuestions">
+        <PropertyRef Name="QuizId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Quizs_dbo_Courses_QuizId">
+    <End Role="Courses" Type="Self.Courses" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Quizs" Type="Self.Quizs" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Courses">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Quizs">
+        <PropertyRef Name="QuizId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_UserBookmarks_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="UserBookmarks" Type="Self.UserBookmarks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserBookmarks">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_UserBookmarks_dbo_Courses_CourseId">
+    <End Role="Courses" Type="Self.Courses" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="UserBookmarks" Type="Self.UserBookmarks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Courses">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserBookmarks">
+        <PropertyRef Name="CourseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_UserProfiles_dbo_AspNetUsers_Id">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="UserProfiles" Type="Self.UserProfiles" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserProfiles">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_UserProgresses_dbo_UserProfiles_UserProfileId">
+    <End Role="UserProfiles" Type="Self.UserProfiles" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="UserProgresses" Type="Self.UserProgresses" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="UserProfiles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserProgresses">
+        <PropertyRef Name="UserProfileId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_UserQuizAnswers_dbo_AspNetUsers_ApplicationUser_Id">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+    <End Role="UserQuizAnswers" Type="Self.UserQuizAnswers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserQuizAnswers">
+        <PropertyRef Name="ApplicationUser_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_UserQuizAnswers_dbo_QuizQuestions_QuizQuestion_Title_QuizQuestion_QuizId">
+    <End Role="QuizQuestions" Type="Self.QuizQuestions" Multiplicity="0..1" />
+    <End Role="UserQuizAnswers" Type="Self.UserQuizAnswers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QuizQuestions">
+        <PropertyRef Name="Title" />
+        <PropertyRef Name="QuizId" />
+      </Principal>
+      <Dependent Role="UserQuizAnswers">
+        <PropertyRef Name="QuizQuestion_Title" />
+        <PropertyRef Name="QuizQuestion_QuizId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_UserQuizAnswers_dbo_Quizs_QuizId">
+    <End Role="Quizs" Type="Self.Quizs" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="UserQuizAnswers" Type="Self.UserQuizAnswers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Quizs">
+        <PropertyRef Name="QuizId" />
+      </Principal>
+      <Dependent Role="UserQuizAnswers">
+        <PropertyRef Name="QuizId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Videos_dbo_CourseSections_CourseSectionId_CourseTitle">
+    <End Role="CourseSections" Type="Self.CourseSections" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Videos" Type="Self.Videos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CourseSections">
+        <PropertyRef Name="CourseId" />
+        <PropertyRef Name="Title" />
+      </Principal>
+      <Dependent Role="Videos">
+        <PropertyRef Name="CourseSectionId" />
+        <PropertyRef Name="CourseTitle" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DomainStoreContainer">
+    <EntitySet Name="ApplicationUserSubscriptions" EntityType="Self.ApplicationUserSubscriptions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Catagories" EntityType="Self.Catagories" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CertificationPaths" EntityType="Self.CertificationPaths" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Certifications" EntityType="Self.Certifications" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CourseProgresses" EntityType="Self.CourseProgresses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CourseReviews" EntityType="Self.CourseReviews" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Courses" EntityType="Self.Courses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CoursesCertificationPathsTable" EntityType="Self.CoursesCertificationPathsTable" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CourseSections" EntityType="Self.CourseSections" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CreditCards" EntityType="Self.CreditCards" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DisplayPictures" EntityType="Self.DisplayPictures" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Links" EntityType="Self.Links" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="QuestionOptions" EntityType="Self.QuestionOptions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="QuizApplicationUsers" EntityType="Self.QuizApplicationUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="QuizQuestions" EntityType="Self.QuizQuestions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Quizs" EntityType="Self.Quizs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Subscriptions" EntityType="Self.Subscriptions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserBookmarks" EntityType="Self.UserBookmarks" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserProfiles" EntityType="Self.UserProfiles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserProgresses" EntityType="Self.UserProgresses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserQuizAnswers" EntityType="Self.UserQuizAnswers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Videos" EntityType="Self.Videos" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_dbo_ApplicationUserSubscriptions_dbo_AspNetUsers_ApplicationUserRefId" Association="Self.FK_dbo_ApplicationUserSubscriptions_dbo_AspNetUsers_ApplicationUserRefId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="ApplicationUserSubscriptions" EntitySet="ApplicationUserSubscriptions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_ApplicationUserSubscriptions_dbo_Subscriptions_SubscriptionRefId" Association="Self.FK_dbo_ApplicationUserSubscriptions_dbo_Subscriptions_SubscriptionRefId">
+      <End Role="Subscriptions" EntitySet="Subscriptions" />
+      <End Role="ApplicationUserSubscriptions" EntitySet="ApplicationUserSubscriptions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Certifications_dbo_UserProfiles_ProfileId" Association="Self.FK_dbo_Certifications_dbo_UserProfiles_ProfileId">
+      <End Role="UserProfiles" EntitySet="UserProfiles" />
+      <End Role="Certifications" EntitySet="Certifications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_CourseProgresses_dbo_Courses_CourseId" Association="Self.FK_dbo_CourseProgresses_dbo_Courses_CourseId">
+      <End Role="Courses" EntitySet="Courses" />
+      <End Role="CourseProgresses" EntitySet="CourseProgresses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_CourseProgresses_dbo_UserProgresses_UserProgress_UserProfileId" Association="Self.FK_dbo_CourseProgresses_dbo_UserProgresses_UserProgress_UserProfileId">
+      <End Role="UserProgresses" EntitySet="UserProgresses" />
+      <End Role="CourseProgresses" EntitySet="CourseProgresses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_CourseReviews_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_CourseReviews_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="CourseReviews" EntitySet="CourseReviews" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_CourseReviews_dbo_Courses_CourseId" Association="Self.FK_dbo_CourseReviews_dbo_Courses_CourseId">
+      <End Role="Courses" EntitySet="Courses" />
+      <End Role="CourseReviews" EntitySet="CourseReviews" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Courses_dbo_AspNetUsers_AuthorId" Association="Self.FK_dbo_Courses_dbo_AspNetUsers_AuthorId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Courses" EntitySet="Courses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Courses_dbo_Catagories_CatagoryId" Association="Self.FK_dbo_Courses_dbo_Catagories_CatagoryId">
+      <End Role="Catagories" EntitySet="Catagories" />
+      <End Role="Courses" EntitySet="Courses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_CoursesCertificationPathsTable_dbo_CertificationPaths_CourseRefId" Association="Self.FK_dbo_CoursesCertificationPathsTable_dbo_CertificationPaths_CourseRefId">
+      <End Role="CertificationPaths" EntitySet="CertificationPaths" />
+      <End Role="CoursesCertificationPathsTable" EntitySet="CoursesCertificationPathsTable" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_CoursesCertificationPathsTable_dbo_Courses_CertificationPathRefId" Association="Self.FK_dbo_CoursesCertificationPathsTable_dbo_Courses_CertificationPathRefId">
+      <End Role="Courses" EntitySet="Courses" />
+      <End Role="CoursesCertificationPathsTable" EntitySet="CoursesCertificationPathsTable" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_CourseSections_dbo_Courses_CourseId" Association="Self.FK_dbo_CourseSections_dbo_Courses_CourseId">
+      <End Role="Courses" EntitySet="Courses" />
+      <End Role="CourseSections" EntitySet="CourseSections" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_CreditCards_dbo_AspNetUsers_AccountId" Association="Self.FK_dbo_CreditCards_dbo_AspNetUsers_AccountId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="CreditCards" EntitySet="CreditCards" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_DisplayPictures_dbo_UserProfiles_ProfileId" Association="Self.FK_dbo_DisplayPictures_dbo_UserProfiles_ProfileId">
+      <End Role="UserProfiles" EntitySet="UserProfiles" />
+      <End Role="DisplayPictures" EntitySet="DisplayPictures" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Links_dbo_UserProfiles_UserProfileId" Association="Self.FK_dbo_Links_dbo_UserProfiles_UserProfileId">
+      <End Role="UserProfiles" EntitySet="UserProfiles" />
+      <End Role="Links" EntitySet="Links" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_OrderDetails_dbo_Orders_OrderId" Association="Self.FK_dbo_OrderDetails_dbo_Orders_OrderId">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="OrderDetails" EntitySet="OrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Orders_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_Orders_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Orders_dbo_Subscriptions_SubscriptionId" Association="Self.FK_dbo_Orders_dbo_Subscriptions_SubscriptionId">
+      <End Role="Subscriptions" EntitySet="Subscriptions" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_QuestionOptions_dbo_QuizQuestions_QuestionTitle_QuestionId" Association="Self.FK_dbo_QuestionOptions_dbo_QuizQuestions_QuestionTitle_QuestionId">
+      <End Role="QuizQuestions" EntitySet="QuizQuestions" />
+      <End Role="QuestionOptions" EntitySet="QuestionOptions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_QuizApplicationUsers_dbo_AspNetUsers_ApplicationUser_Id" Association="Self.FK_dbo_QuizApplicationUsers_dbo_AspNetUsers_ApplicationUser_Id">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="QuizApplicationUsers" EntitySet="QuizApplicationUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_QuizApplicationUsers_dbo_Quizs_Quiz_QuizId" Association="Self.FK_dbo_QuizApplicationUsers_dbo_Quizs_Quiz_QuizId">
+      <End Role="Quizs" EntitySet="Quizs" />
+      <End Role="QuizApplicationUsers" EntitySet="QuizApplicationUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_QuizQuestions_dbo_Quizs_QuizId" Association="Self.FK_dbo_QuizQuestions_dbo_Quizs_QuizId">
+      <End Role="Quizs" EntitySet="Quizs" />
+      <End Role="QuizQuestions" EntitySet="QuizQuestions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Quizs_dbo_Courses_QuizId" Association="Self.FK_dbo_Quizs_dbo_Courses_QuizId">
+      <End Role="Courses" EntitySet="Courses" />
+      <End Role="Quizs" EntitySet="Quizs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_UserBookmarks_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_UserBookmarks_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="UserBookmarks" EntitySet="UserBookmarks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_UserBookmarks_dbo_Courses_CourseId" Association="Self.FK_dbo_UserBookmarks_dbo_Courses_CourseId">
+      <End Role="Courses" EntitySet="Courses" />
+      <End Role="UserBookmarks" EntitySet="UserBookmarks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_UserProfiles_dbo_AspNetUsers_Id" Association="Self.FK_dbo_UserProfiles_dbo_AspNetUsers_Id">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="UserProfiles" EntitySet="UserProfiles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_UserProgresses_dbo_UserProfiles_UserProfileId" Association="Self.FK_dbo_UserProgresses_dbo_UserProfiles_UserProfileId">
+      <End Role="UserProfiles" EntitySet="UserProfiles" />
+      <End Role="UserProgresses" EntitySet="UserProgresses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_UserQuizAnswers_dbo_AspNetUsers_ApplicationUser_Id" Association="Self.FK_dbo_UserQuizAnswers_dbo_AspNetUsers_ApplicationUser_Id">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="UserQuizAnswers" EntitySet="UserQuizAnswers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_UserQuizAnswers_dbo_QuizQuestions_QuizQuestion_Title_QuizQuestion_QuizId" Association="Self.FK_dbo_UserQuizAnswers_dbo_QuizQuestions_QuizQuestion_Title_QuizQuestion_QuizId">
+      <End Role="QuizQuestions" EntitySet="QuizQuestions" />
+      <End Role="UserQuizAnswers" EntitySet="UserQuizAnswers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_UserQuizAnswers_dbo_Quizs_QuizId" Association="Self.FK_dbo_UserQuizAnswers_dbo_Quizs_QuizId">
+      <End Role="Quizs" EntitySet="Quizs" />
+      <End Role="UserQuizAnswers" EntitySet="UserQuizAnswers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Videos_dbo_CourseSections_CourseSectionId_CourseTitle" Association="Self.FK_dbo_Videos_dbo_CourseSections_CourseSectionId_CourseTitle">
+      <End Role="CourseSections" EntitySet="CourseSections" />
+      <End Role="Videos" EntitySet="Videos" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
